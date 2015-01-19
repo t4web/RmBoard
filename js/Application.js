@@ -1,11 +1,9 @@
 var app = {
 
-    router: null,
-
     run: function() {
-        var _that = this;
-        require(["Router"], function ( Router ) {
-            _that.router = new Router();
+        require(["BoardController"], function ( BoardController ) {
+            var board = new BoardController();
+            board.render();
         });
     }
 };
