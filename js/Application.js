@@ -1,9 +1,9 @@
 var app = {
 
     run: function() {
-        require(["BoardController"], function ( BoardController ) {
-            var board = new BoardController();
-            board.render();
+        require(["BoardView"], function ( BoardView ) {
+            var board = new BoardView();
+            $('body').prepend(board.render().el);
         });
     }
 };

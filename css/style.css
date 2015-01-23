@@ -1757,7 +1757,7 @@ body > .header .logo .icon {
 }
 .box > .loading-img {
   z-index: 1020;
-  background: transparent url('../img/ajax-loader1.gif') 50% 50% no-repeat;
+  background: transparent url('../img/ajax-loader.gif') 50% 50% no-repeat;
 }
 /*
 Component: timeline
@@ -3538,4 +3538,8 @@ fieldset[disabled] .btn-vk.active {
 
 .box .box-header > .fa, .box .box-header > .glyphicon, .box .box-header > .ion, .box .box-header .box-title {
   font-size: 16px;
+}
+
+.box.box-loader {
+    height: 100px;
 }

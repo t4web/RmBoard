@@ -1,24 +1,28 @@
 define(
-    'BoardController',
+    'BoardView',
     ["backbone", "TasksCollection", 'template/board'],
     function(Backbone, TasksCollection, boardTpl) {
         'use strict';
 
-        var BoardController = Backbone.View.extend({
+        var BoardView = Backbone.View.extend({
+
+            className: 'wrapper row-offcanvas',
 
             initialize: function() {
             },
 
             render: function() {
                 var template = _.template(boardTpl);
-                $('body').append(template());
 
-                var tasks = new TasksCollection();
-                tasks.fetch();
+                this.$el.html(template());
+
+                return this;
+                //var tasks = new TasksCollection();
+                //tasks.fetch();
             }
 
         });
 
-        return BoardController;
+        return BoardView;
     }
 );
