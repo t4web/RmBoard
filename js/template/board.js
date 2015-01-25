@@ -49,38 +49,38 @@ define([], function() {
                         </h1>\n\
                     </div>\n\
                 </div>\n\
-                <div class="row">\n\
-                    <div class="col-md-2">\
+                <div class="row" id="columns">\n\
+                    <div class="col-md-2" id="to-do">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2">\
+                    <div class="col-md-2" id="in-progress">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2">\
+                    <div class="col-md-2" id="in-test">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2">\
+                    <div class="col-md-2" id="ready-for-merge">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2">\
+                    <div class="col-md-2" id="in-prod">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2">\
+                    <div class="col-md-2" id="done">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\

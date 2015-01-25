@@ -1,10 +1,10 @@
 define(
-    'BoardView',
-    ["backbone", 'template/board'],
-    function(Backbone, boardTpl) {
+    'TasksView',
+    ["backbone"],
+    function(Backbone) {
         'use strict';
 
-        var BoardView = Backbone.View.extend({
+        var TasksView = Backbone.View.extend({
 
             tasks: null,
             className: 'wrapper row-offcanvas',
@@ -29,6 +29,6 @@ define(
 
         });
 
-        return BoardView;
+        return TasksView;
     }
 );

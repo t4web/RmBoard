@@ -1,10 +1,13 @@
 var app = {
 
     run: function() {
-        require(["BoardView"], function ( BoardView ) {
-            var board = new BoardView();
-            $('body').prepend(board.render().el);
-        });
+        require(
+            ["BoardView", "TasksCollection"],
+            function ( BoardView, TasksCollection ) {
+                var board = new BoardView({tasks: new TasksCollection()});
+                $('body').prepend(board.render().el);
+            }
+        );
     }
 };
 
