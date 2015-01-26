@@ -1,6 +1,6 @@
 describe('Board suite', function() {
     var boardView;
-    var tasks
+    var tasks;
 
     // Use require.js to fetch the module
     it("should load the AMD module", function(done) {

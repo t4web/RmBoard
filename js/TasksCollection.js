@@ -6,7 +6,22 @@ define(
 
         var TasksCollection = Backbone.Collection.extend({
             model: TaskModel,
-            url: '/index.php?resource=/issues.json'
+            url: '/index.php?resource=/issues.json',
+
+            parse: function(response, options) {
+                var rawTasks = [];
+
+                _.each(response.issues, function(value){
+                    rawTasks.push({
+                        id: value.id,
+                        name: value.subject,
+                        assignee: value.assigned_to.name,
+                        status: value.status.id
+                    });
+                });
+
+                return rawTasks;
+            }
         });
 
         return TasksCollection;
