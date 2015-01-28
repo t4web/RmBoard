@@ -21,6 +21,21 @@ define(
                 });
 
                 return rawTasks;
+            },
+
+            fetch: function() {
+                var _this = this;
+                Backbone.Collection.prototype.fetch.call(
+                    this,
+                    {
+                        success: function(collection, response, options) {
+                            _this.trigger('fetch:success');
+                        },
+                        error: function(collection, response, options) {
+                            _this.trigger('fetch:error');
+                        }
+                    }
+                );
             }
         });
 

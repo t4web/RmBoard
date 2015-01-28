@@ -80,5 +80,30 @@ describe('Tasks Collection suite', function () {
         ]);
     });
 
+    it("fetch should trigger 'success' event", function () {
+        var handler = jasmine.createSpy('event');
+        tasks.on('fetch:success', handler);
+
+        spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
+            options.success({"total_count":1459,"limit":25,"issues":[],"offset":0});
+        });
+
+        tasks.fetch();
+
+        expect(handler).toHaveBeenCalled();
+    });
+
+    it("fetch should trigger 'error' event", function () {
+        var handler = jasmine.createSpy('event');
+        tasks.on('fetch:error', handler);
+
+        spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
+            options.error({"mssage":"some reason"});
+        });
+
+        tasks.fetch();
+
+        expect(handler).toHaveBeenCalled();
+    });
 
 });
