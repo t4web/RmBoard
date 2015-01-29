@@ -11,6 +11,11 @@ define(
             parse: function(response, options) {
                 var rawTasks = [];
 
+                if (response.issues.length == 0) {
+                    this.trigger('empty-issues');
+                    return rawTasks;
+                }
+
                 _.each(response.issues, function(value){
                     rawTasks.push({
                         id: value.id,
@@ -24,18 +29,21 @@ define(
             },
 
             fetch: function() {
-                var _this = this;
                 Backbone.Collection.prototype.fetch.call(
                     this,
                     {
-                        success: function(collection, response, options) {
-                            _this.trigger('fetch:success');
-                        },
-                        error: function(collection, response, options) {
-                            _this.trigger('fetch:error');
-                        }
+                        success: this.onSuccess,
+                        error: this.onError
                     }
                 );
+            },
+
+            onSuccess: function(collection, response, options) {
+                collection.trigger('fetch:success', collection);
+            },
+
+            onError: function(collection, response, options) {
+                collection.trigger('fetch:error', collection);
             }
         });
 

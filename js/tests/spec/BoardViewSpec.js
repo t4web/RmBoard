@@ -7,9 +7,13 @@ describe('Board suite', function() {
         require(
             ['BoardView'],
             function (BoardView) {
-                tasks = jasmine.createSpyObj('tasks', ['fetch']);
+                tasks = jasmine.createSpyObj('tasks', ['fetch', 'on', 'off']);
+                var tasksView = jasmine.createSpyObj('tasksView', ['listenTo', 'render']);
 
-                boardView = new BoardView({tasks: tasks});
+                boardView = new BoardView({
+                    tasks: tasks,
+                    tasksView: tasksView
+                });
                 expect(boardView).toBeDefined();
                 done();
             }
@@ -74,4 +78,6 @@ describe('Board suite', function() {
         });
 
     });
+
+
 });

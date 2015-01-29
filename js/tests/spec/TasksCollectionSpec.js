@@ -85,12 +85,12 @@ describe('Tasks Collection suite', function () {
         tasks.on('fetch:success', handler);
 
         spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
-            options.success({"total_count":1459,"limit":25,"issues":[],"offset":0});
+            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"name":"name"},"status":{"id":1}}],"offset":0});
         });
 
         tasks.fetch();
 
-        expect(handler).toHaveBeenCalled();
+        expect(handler).toHaveBeenCalledWith(tasks);
     });
 
     it("fetch should trigger 'error' event", function () {
@@ -103,7 +103,20 @@ describe('Tasks Collection suite', function () {
 
         tasks.fetch();
 
-        expect(handler).toHaveBeenCalled();
+        expect(handler).toHaveBeenCalledWith(tasks);
+    });
+
+    it("fetch should trigger 'empty-issues' event", function () {
+        var handler = jasmine.createSpy('event');
+        tasks.on('empty-issues', handler);
+
+        spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
+            options.success({"total_count":1459,"limit":25,"issues":[],"offset":0});
+        });
+
+        tasks.fetch();
+
+        expect(handler).toHaveBeenCalledWith();
     });
 
 });

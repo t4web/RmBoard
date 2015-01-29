@@ -4,7 +4,6 @@ require.config({
     // 3rd party script alias names
     paths: {
         // Core Libraries
-        "jquery": "lib/jquery.2.0.2.min",
         "underscore": "lib/underscore.1.7.0.min",
         "backbone": "lib/backbone.1.1.2.min"
     },
@@ -12,9 +11,11 @@ require.config({
     // Sets the configuration for your third party scripts that are not AMD compatible
     shim: {
         "backbone": {
-            "deps": [ "underscore", "jquery" ],
+            "deps": [ "underscore" ],
             "exports": "Backbone"
         }
 
     }
 });
+
+define('jquery', function() { return jQuery; });

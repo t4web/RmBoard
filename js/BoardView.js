@@ -1,16 +1,20 @@
 define(
     'BoardView',
-    ["backbone", 'template/board'],
+    ['backbone', 'template/board'],
     function(Backbone, boardTpl) {
         'use strict';
 
         var BoardView = Backbone.View.extend({
 
             tasks: null,
+            tasksView: null,
             className: 'wrapper row-offcanvas',
 
             initialize: function(options) {
                 this.tasks = options.tasks;
+                this.tasksView = options.tasksView;
+
+                this.tasksView.listenTo(this.tasks, 'fetch:success', this.tasksView.render);
             },
 
             render: function() {
