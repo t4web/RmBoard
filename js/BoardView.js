@@ -14,7 +14,7 @@ define(
                 this.tasks = options.tasks;
                 this.tasksView = options.tasksView;
 
-                this.tasksView.listenTo(this.tasks, 'fetch:success', this.tasksView.render);
+                //this.tasksView.listenTo(this.tasks, 'fetch:success', this.tasksView.render);
             },
 
             render: function() {

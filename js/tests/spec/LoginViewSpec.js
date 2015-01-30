@@ -1,4 +1,4 @@
-describe('Login suite', function() {
+describe('Login View suite', function() {
     var loginView;
     var tasks;
 

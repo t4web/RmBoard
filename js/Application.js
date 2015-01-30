@@ -8,7 +8,7 @@ var app = {
 
                 var board = new BoardView({
                     tasks: tasks,
-                    tasksView: new TasksView({id: 'to-do'})
+                    tasksView: new TasksView({el: '#to-do', status: 1, tasks: tasks})
                 });
 
                 var loginForm = new LoginView({
