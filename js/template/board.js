@@ -1,8 +1,8 @@
 define([], function() {
     return '<section class="content">\n\
-                <div class="row">\n\
+                <div class="row refresh">\n\
                     <div class="col-md-12">\n\
-                        <button class="btn btn-success btn-sm pull-right"><i class="fa fa-refresh"></i> Refresh</button>\n\
+                        <button class="btn btn-success btn-sm pull-right" id="refresh-btn" disabled="disabled"><i class="fa fa-refresh"></i> Refresh</button>\n\
                     </div>\n\
                 </div>\n\
                 \n\

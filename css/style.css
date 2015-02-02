@@ -3543,3 +3543,12 @@ fieldset[disabled] .btn-vk.active {
 .box.box-loader {
     height: 100px;
 }
+
+.row.refresh {
+    height: 30px;
+}
+
+#nprogress .spinner {
+    top: 25px;
+    right: 100px;
+}

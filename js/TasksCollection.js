@@ -29,6 +29,8 @@ define(
             },
 
             fetch: function() {
+                this.trigger('fetch:before');
+
                 Backbone.Collection.prototype.fetch.call(
                     this,
                     {

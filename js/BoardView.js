@@ -1,17 +1,23 @@
 define(
     'BoardView',
-    ['backbone', 'template/board'],
-    function(Backbone, boardTpl) {
+    ['backbone', 'lib/nprogress/nprogress', 'template/board'],
+    function(Backbone, NProgress, boardTpl) {
         'use strict';
 
         var BoardView = Backbone.View.extend({
 
             tasks: null,
-            tasksView: null,
             className: 'wrapper row-offcanvas',
+
+            events: {
+                "click button#refresh-btn": "refresh"
+            },
 
             initialize: function(options) {
                 this.tasks = options.tasks;
+
+                this.listenTo(this.tasks, 'fetch:before', this.startLoader);
+                this.listenTo(this.tasks, 'fetch:success', this.stopLoader);
             },
 
             render: function() {
@@ -26,6 +32,16 @@ define(
 
             refresh: function() {
                 this.tasks.fetch();
+            },
+
+            startLoader: function() {
+                $('button#refresh-btn').attr('disabled','disabled');
+                NProgress.start();
+            },
+
+            stopLoader: function() {
+                NProgress.done();
+                $('button#refresh-btn').removeAttr('disabled');
             }
 
         });

@@ -80,6 +80,19 @@ describe('Tasks Collection suite', function () {
         ]);
     });
 
+    it("fetch should trigger 'before' event", function () {
+        var handler = jasmine.createSpy('event');
+        tasks.on('fetch:before', handler);
+
+        spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
+            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"name":"name"},"status":{"id":1}}],"offset":0});
+        });
+
+        tasks.fetch();
+
+        expect(handler).toHaveBeenCalledWith();
+    });
+
     it("fetch should trigger 'success' event", function () {
         var handler = jasmine.createSpy('event');
         tasks.on('fetch:success', handler);
