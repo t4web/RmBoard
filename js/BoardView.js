@@ -12,9 +12,6 @@ define(
 
             initialize: function(options) {
                 this.tasks = options.tasks;
-                this.tasksView = options.tasksView;
-
-                //this.tasksView.listenTo(this.tasks, 'fetch:success', this.tasksView.render);
             },
 
             render: function() {

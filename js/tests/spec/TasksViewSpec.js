@@ -20,7 +20,7 @@ describe('Tasks View suite', function() {
         );
     });
 
-    it("test binding to fetch:success:STATUS must call render", function(done) {
+    it("test binding to fetch:success must call render", function(done) {
         require(
             ['TasksView', 'TasksCollection'],
             function (TasksView, TasksCollection) {
@@ -33,7 +33,7 @@ describe('Tasks View suite', function() {
                     tasks: tasks
                 });
 
-                tasks.trigger("fetch:success:XXX");
+                tasks.trigger("fetch:success");
                 expect(spyOnRender).toHaveBeenCalled();
                 done();
             }

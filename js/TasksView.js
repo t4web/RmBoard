@@ -13,22 +13,22 @@ define(
                 this.status = options.status;
                 this.tasks = options.tasks;
 
-                //this.id = this.status;
-
                 this.listenTo(this.tasks, 'fetch:success', this.render);
             },
 
             render: function() {
+
+                this.$el = $('#' + this.id);
                 
                 var tasks = this.tasks.where({status: this.status});
 
                 var template = _.template(taskTpl);
 
-                $('#to-do').html('');
+                this.$el.html('');
 
                 _.each(tasks, function(task){
-                    $('#to-do').append(template(task.toJSON()));
-                });
+                    this.$el.append(template(task.toJSON()));
+                }, this);
             }
 
         });
