@@ -4,6 +4,11 @@ $config = require_once 'config.php';
 
 header('Content-type: application/json');
 
+if ($_GET['resource'] == 'get-config') {
+    echo json_encode($config);
+    exit;
+}
+
 $httpMethod = 'GET';
 
 if (isset($_GET['method'])) {
