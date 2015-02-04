@@ -42,6 +42,26 @@ define(
             stopLoader: function() {
                 NProgress.done();
                 $('button#refresh-btn').removeAttr('disabled');
+
+                // http://api.jqueryui.com/sortable
+
+                $("#in-test").sortable({
+                    placeholder: "sort-highlight",
+                    connectWith: "#ready-for-merge",
+                    handle: ".box-header",
+                    forcePlaceholderSize: true,
+                    zIndex: 999999,
+                    stop: function( event, ui ) {console.log('stop');},
+                    start: function( event, ui ) {console.log('start');}
+                }).disableSelection();
+
+                $("#ready-for-merge").sortable({
+                    placeholder: "sort-highlight",
+                    connectWith: "#in-prod",
+                    handle: ".box-header",
+                    forcePlaceholderSize: true,
+                    zIndex: 999999
+                }).disableSelection();
             }
 
         });
