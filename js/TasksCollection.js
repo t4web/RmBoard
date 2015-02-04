@@ -17,11 +17,33 @@ define(
                 }
 
                 _.each(response.issues, function(value){
+
+                    var colorClass = '';
+
+                    switch (value.tracker.id) {
+                        case 1:
+                            colorClass = 'bg-red';
+                            break;
+                        case 2:
+                            colorClass = 'bg-aqua';
+                            break;
+                        case 3:
+                            colorClass = 'bg-yellow';
+                            break;
+                        case 4:
+                            colorClass = 'bg-green';
+                            break;
+                        default:
+                            colorClass = 'bg-green';
+                    }
+
                     rawTasks.push({
                         id: value.id,
                         name: value.subject,
                         assignee: value.assigned_to.name,
-                        status: value.status.id
+                        status: value.status.id,
+                        type: value.tracker.id,
+                        colorClass: colorClass
                     });
                 });
 

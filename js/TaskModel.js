@@ -6,10 +6,12 @@ define(
 
         var TaskModel = Backbone.Model.extend({
             defaults: {
-                'id': null,
-                'name': '',
-                'assignee': '',
-                'status': 'to-do'
+                id: null,
+                name: '',
+                assignee: '',
+                status: 1,
+                type: 1,
+                colorClass: 'bg-green'
             }
         });
 
