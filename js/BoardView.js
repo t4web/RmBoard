@@ -45,6 +45,16 @@ define(
 
                 // http://api.jqueryui.com/sortable
 
+                $("#ready-for-merge-test").sortable({
+                    placeholder: "sort-highlight",
+                    connectWith: "#in-test",
+                    handle: ".box-header",
+                    forcePlaceholderSize: true,
+                    zIndex: 999999,
+                    stop: function( event, ui ) {console.log('stop');},
+                    start: function( event, ui ) {console.log('start');}
+                }).disableSelection();
+
                 $("#in-test").sortable({
                     placeholder: "sort-highlight",
                     connectWith: "#ready-for-merge",

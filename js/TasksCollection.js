@@ -6,7 +6,7 @@ define(
 
         var TasksCollection = Backbone.Collection.extend({
             model: TaskModel,
-            url: '/index.php?resource=/issues.json',
+            url: '/index.php?resource=/issues.json?limit=100',
 
             parse: function(response, options) {
                 var rawTasks = [];

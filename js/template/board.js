@@ -7,7 +7,7 @@ define([], function() {
                 </div>\n\
                 \n\
                 <div class="row">\n\
-                    <div class="col-md-2">\n\
+                    <div class="col-md-1">\n\
                         <h1 class="page-header"> \n\
                             To do\n\
                             <small>Новая</small>\n\
@@ -23,6 +23,13 @@ define([], function() {
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
+                            Ready for merge on test\n\
+                            <small>Решена, нужно смерджить на тест</small>\n\
+                        </h1>\n\
+                    </div>\n\
+                    \n\
+                    <div class="col-md-2">\n\
+                        <h1 class="page-header">\n\
                             In Test\n\
                             <small>Решена</small>\n\
                         </h1>\n\
@@ -30,7 +37,7 @@ define([], function() {
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            Ready for merge\n\
+                            Ready for merge on prod\n\
                             <small>Решена, нужно смерджить на прод</small>\n\
                         </h1>\n\
                     </div>\n\
@@ -42,7 +49,7 @@ define([], function() {
                         </h1>\n\
                     </div>\n\
                     \n\
-                    <div class="col-md-2">\n\
+                    <div class="col-md-1">\n\
                         <h1 class="page-header">\n\
                             Done\n\
                             <small>Закрыта</small>\n\
@@ -50,13 +57,19 @@ define([], function() {
                     </div>\n\
                 </div>\n\
                 <div class="row" id="columns">\n\
-                    <div class="col-md-2" id="to-do">\
+                    <div class="col-md-1" id="to-do">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
                     <div class="col-md-2" id="in-progress">\
+                        <div class="box box-solid box-loader">\
+                            <div class="overlay"></div>\
+                            <div class="loading-img"></div>\
+                        </div>\
+                    </div>\n\
+                    <div class="col-md-2" id="ready-for-merge-test">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
@@ -80,7 +93,7 @@ define([], function() {
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2" id="done">\
+                    <div class="col-md-1" id="done">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
