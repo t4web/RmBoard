@@ -28,6 +28,13 @@ $opts = array(
     )
 );
 
+if ($_POST) {
+    $content = json_encode($_POST);
+    $opts['http']['content'] = $content;
+    $opts['http']['header'] .= "Content-Length: " . strlen($content) . "\r\n";
+    $opts['http']['header'] .= "Content-Type: application/json\r\n";
+}
+
 $context = stream_context_create($opts);
 
 // Open the file using the HTTP headers set above

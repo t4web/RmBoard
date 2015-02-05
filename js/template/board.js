@@ -31,7 +31,7 @@ define([], function() {
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
                             In Test\n\
-                            <small>Решена</small>\n\
+                            <small>Решена, нужно проверить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\

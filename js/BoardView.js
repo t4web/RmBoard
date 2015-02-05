@@ -45,14 +45,21 @@ define(
 
                 // http://api.jqueryui.com/sortable
 
+                var _this = this;
+
                 $("#ready-for-merge-test").sortable({
                     placeholder: "sort-highlight",
                     connectWith: "#in-test",
                     handle: ".box-header",
                     forcePlaceholderSize: true,
                     zIndex: 999999,
-                    stop: function( event, ui ) {console.log('stop');},
-                    start: function( event, ui ) {console.log('start');}
+                    start: function( event, ui ) {console.log('start');},
+                    stop: function( event, ui ) {
+                        var taskEl = ui.item;
+                        var model = _this.tasks.get(taskEl.attr('id'));
+                        _this.listenTo(model, 'change:name', _this.onChangeName);
+                        model.mergedToTest();
+                    }
                 }).disableSelection();
 
                 $("#in-test").sortable({
@@ -61,8 +68,8 @@ define(
                     handle: ".box-header",
                     forcePlaceholderSize: true,
                     zIndex: 999999,
-                    stop: function( event, ui ) {console.log('stop');},
-                    start: function( event, ui ) {console.log('start');}
+                    start: function( event, ui ) {console.log('start');},
+                    stop: function( event, ui ) {console.log('stop');}
                 }).disableSelection();
 
                 $("#ready-for-merge").sortable({
@@ -72,6 +79,10 @@ define(
                     forcePlaceholderSize: true,
                     zIndex: 999999
                 }).disableSelection();
+            },
+
+            onChangeName: function(model) {
+                $('#' + model.get('id') + ' h3').text(model.get('name'));
             }
 
         });
