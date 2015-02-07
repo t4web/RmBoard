@@ -1,7 +1,7 @@
 define(
     'TasksCollection',
-    ["backbone", "TaskModel"],
-    function (Backbone, TaskModel) {
+    ["backbone", "TaskModel", "Status/Factory"],
+    function (Backbone, TaskModel, StatusFactory) {
         'use strict';
 
         var TasksCollection = Backbone.Collection.extend({
@@ -15,6 +15,8 @@ define(
                     this.trigger('empty-issues');
                     return rawTasks;
                 }
+
+                var statusFactory = new StatusFactory();
 
                 _.each(response.issues, function(value){
 
@@ -37,11 +39,17 @@ define(
                             colorClass = 'bg-green';
                     }
 
+                    if (!value.hasOwnProperty('assigned_to')) {
+                        return;
+                    }
+
+                    var status = statusFactory.create(value.status.id, value.subject);
+
                     rawTasks.push({
                         id: value.id,
                         name: value.subject,
                         assignee: value.assigned_to.name,
-                        status: value.status.id,
+                        status: status.get('id'),
                         type: value.tracker.id,
                         colorClass: colorClass
                     });

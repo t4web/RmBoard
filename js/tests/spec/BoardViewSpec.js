@@ -32,8 +32,9 @@ describe('Board suite', function() {
             expect(tasks.fetch).toHaveBeenCalled();
         });
 
-        it("el contain 6 columns", function() {
-            expect($(boardView.el).find('#columns .col-md-2').length).toEqual(6);
+        it("el contain 7 columns", function() {
+            expect($(boardView.el).find('#columns .col-md-2').length).toEqual(5);
+            expect($(boardView.el).find('#columns .col-md-1').length).toEqual(2);
         });
 
         it("'To do' column should exists", function() {

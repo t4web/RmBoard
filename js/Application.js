@@ -15,10 +15,10 @@ var app = {
                 new TasksView({id: 'to-do', status: 1, tasks: tasks});
                 new TasksView({id: 'in-progress', status: 2, tasks: tasks});
                 new TasksView({id: 'ready-for-merge-test', status: 3, tasks: tasks});
-                new TasksView({id: 'in-test', status: 9, tasks: tasks});
-                new TasksView({id: 'ready-for-merge', status: 9, tasks: tasks});
-                new TasksView({id: 'in-prod', status: 9, tasks: tasks});
-                new TasksView({id: 'done', status: 9, tasks: tasks});
+                new TasksView({id: 'in-test', status: 31, tasks: tasks});
+                new TasksView({id: 'ready-for-merge', status: 32, tasks: tasks});
+                new TasksView({id: 'in-prod', status: 33, tasks: tasks});
+                new TasksView({id: 'done', status: 5, tasks: tasks});
 
                 var loginForm = new LoginView({
                     tasks: tasks
