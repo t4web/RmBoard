@@ -2,24 +2,9 @@ var app = {
 
     config: [],
 
-    run: function() {
-        require(
-            ["BoardView", "LoginView", "TasksCollection"],
-            function ( BoardView, LoginView, TasksCollection ) {
-                var tasks = new TasksCollection();
-
-                var board = new BoardView({
-                    tasks: tasks
-                });
-
-                var loginForm = new LoginView({
-                    tasks: tasks
-                });
-
-                $('body').prepend(board.render().el);
-                $('body').append(loginForm.render().el);
-            }
-        );
+    run: function(board, loginForm) {
+        $('body').prepend(board.render().el);
+        $('body').append(loginForm.render().el);
     },
 
     getConfig: function(variableName) {
@@ -43,4 +28,30 @@ var app = {
     }
 };
 
-app.run();
+require(
+    ["ServiceLocator", "TasksCollection", "BoardView", "LoginView"],
+    function ( ServiceLocator, TasksCollection, BoardView, LoginView ) {
+        var config = {
+            TasksCollection: function(){
+                return new TasksCollection();
+            },
+            BoardView: function(sl){
+                return new BoardView({
+                    tasks: sl.get('TasksCollection')
+                });
+            },
+            LoginView: function(sl){
+                return new LoginView({
+                    tasks: sl.get('TasksCollection')
+                });
+            }
+        };
+
+        var serviceLocator = new ServiceLocator(config);
+
+        app.run(
+            serviceLocator.get('BoardView'),
+            serviceLocator.get('LoginView')
+        );
+    }
+);
