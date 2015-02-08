@@ -128,4 +128,55 @@ describe('ServiceLocator suite', function() {
 
     });
 
+    it("resolve() should inject service with resolved dependencies to callback", function(done) {
+        require(
+            ['ServiceLocator'],
+            function (ServiceLocator) {
+
+                var Service1 = function() {
+                    this.bar = function(){};
+                    this.baz = function(){};
+                };
+
+                var Service2 = function(dependencyService1) {
+                    this.foo = function(){
+                        dependencyService1.bar();
+                    };
+                    this.zoo = function(){
+                        dependencyService1.baz();
+                    };
+                    this.getService1 = function(){
+                        return dependencyService1;
+                    };
+                };
+
+                var config = {
+                    'BoardView': function(sl) {
+                        return new BoardView();
+                    },
+                    'LoginView': function(sl) {
+                        return new LoginView(sl.get('BoardView'));
+                    }
+                };
+
+                var serviceLocator = new ServiceLocator(config);
+
+                var app = {
+                    run: function(s1, s2) {}
+                };
+
+                spyOn(app, 'run');
+
+                serviceLocator.resolve(['BoardView', 'LoginView'], app.run);
+
+                expect(app.run).toHaveBeenCalledWith(
+                    serviceLocator.get('BoardView'),
+                    serviceLocator.get('LoginView')
+                );
+                done();
+            }
+        );
+
+    });
+
 });

@@ -46,6 +46,24 @@ define(
 
                 return instances[name];
             };
+
+            this.resolve = function(deps, callback){
+                require(deps, function(){
+
+                    var args = [];
+
+                    _.each(deps, function(value){
+                        var d = require(value);
+console.log(value, d);
+                        var constructor = config[value];
+
+                        instances[value] = new constructor(this);
+                        args.push(instances[value]);
+                    });
+
+                    callback.apply(1, args);
+                });
+            };
         };
     }
 );
@@ -62,7 +80,7 @@ ServiceLocator.ServiceNotFoundException = function () {
     });
 
     return this;
-}
+};
 var IntermediateInheritor = function() {};
 IntermediateInheritor.prototype = Error.prototype;
 ServiceLocator.ServiceNotFoundException.prototype = new IntermediateInheritor();

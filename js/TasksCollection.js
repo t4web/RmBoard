@@ -7,6 +7,11 @@ define(
         var TasksCollection = Backbone.Collection.extend({
             model: TaskModel,
             url: '/index.php?resource=/issues.json?limit=100',
+            statusFactory: null,
+
+            initialize: function(options) {
+                this.statusFactory = options.statusFactory;
+            },
 
             parse: function(response, options) {
                 var rawTasks = [];
@@ -16,7 +21,7 @@ define(
                     return rawTasks;
                 }
 
-                var statusFactory = new StatusFactory();
+                //var statusFactory = new StatusFactory();
 
                 _.each(response.issues, function(value){
 
@@ -43,7 +48,7 @@ define(
                         return;
                     }
 
-                    var status = statusFactory.create(value.status.id, value.subject);
+                    var status = this.statusFactory.create(value.status.id, value.subject);
 
                     rawTasks.push({
                         id: value.id,
@@ -53,7 +58,7 @@ define(
                         type: value.tracker.id,
                         colorClass: colorClass
                     });
-                });
+                }, this);
 
                 return rawTasks;
             },
