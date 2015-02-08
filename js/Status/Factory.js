@@ -33,7 +33,7 @@ define(
              <option value="6">Отклонена</option>
              */
             this.create = function(externalStatus, taskName) {
-                var status = getStatuses().get(1)
+                var status = getStatuses().get(1);
 
                 if (externalStatus == 2) {
                     status = getStatuses().get(2);

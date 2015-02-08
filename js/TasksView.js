@@ -28,7 +28,9 @@ define(
 
                 _.each(tasks, function(task){
                     this.$el.append(template(task.toJSON()));
+                    console.log(task.get('id'));
                 }, this);
+                console.log('render end');
             }
 
         });

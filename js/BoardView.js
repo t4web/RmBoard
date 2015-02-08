@@ -1,13 +1,14 @@
 define(
     'BoardView',
-    ['backbone', 'lib/nprogress/nprogress', 'template/board'],
-    function(Backbone, NProgress, boardTpl) {
+    ["backbone", "lib/nprogress/nprogress", "template/board", "TasksView"],
+    function(Backbone, NProgress, boardTpl, TasksView) {
         'use strict';
 
         var BoardView = Backbone.View.extend({
 
             tasks: null,
             className: 'wrapper row-offcanvas',
+            columns: [],
 
             events: {
                 "click button#refresh-btn": "refresh"
@@ -22,6 +23,14 @@ define(
 
             render: function() {
                 var template = _.template(boardTpl);
+
+                new TasksView({id: 'to-do', status: 1, tasks: this.tasks});
+                new TasksView({id: 'in-progress', status: 2, tasks: this.tasks});
+                new TasksView({id: 'ready-for-merge-test', status: 3, tasks: this.tasks});
+                new TasksView({id: 'in-test', status: 31, tasks: this.tasks});
+                new TasksView({id: 'ready-for-merge', status: 32, tasks: this.tasks});
+                new TasksView({id: 'in-prod', status: 33, tasks: this.tasks});
+                new TasksView({id: 'done', status: 5, tasks: this.tasks});
 
                 this.$el.html(template());
 
