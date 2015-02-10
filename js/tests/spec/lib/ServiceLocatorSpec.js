@@ -6,174 +6,135 @@ describe('ServiceLocator suite', function() {
         require(
             ['ServiceLocator'],
             function (ServiceLocator) {
-                var config = {
-                    'Service1': function(sl) {
-                        return {};
-                    },
-                    'Service2': function(sl) {
-                        return {};
-                    }
-                };
-                serviceLocator = new ServiceLocator(config);
+                serviceLocator = new ServiceLocator({});
                 expect(serviceLocator).toBeDefined();
                 done();
             }
         );
     });
 
-    it("get() should throws Exception on unregistered service", function() {
-        expect(function() {
-            serviceLocator.get('SomeService');
-        }).toThrowError("Service locator was unable to fetch or create an instance for SomeService");
+    it("Constructor should throws Exception when config is missed", function(done) {
+
+        require(
+            ['ServiceLocator'],
+            function (ServiceLocator) {
+                expect(function() {
+                    serviceLocator = new ServiceLocator();
+                }).toThrowError("Service locator: config must be specified");
+                done();
+            }
+        );
     });
 
-    it("get() should throws ServiceLocator.ServiceNotFoundException on unregistered service", function() {
+    it("resolve() should throws Exception when callback is missed", function() {
+
+        expect(function() {
+            serviceLocator.resolve(["SomeService"]);
+        }).toThrowError("Service locator: callback must be specified");
+
+    });
+
+    it("resolve() should throws Exception on unregistered service", function() {
+
+        expect(function() {
+            serviceLocator.resolve(["SomeService"], function(){});
+        }).toThrowError("Service locator was unable to fetch or create an instance for SomeService");
+
+    });
+
+    it("resolve() should throws ServiceLocator.ServiceNotFoundException on unregistered service", function() {
+
         try {
-            serviceLocator.get('SomeService');
+            serviceLocator.resolve(['SomeService'], function(){});
         } catch (e) {
             expect(e instanceof ServiceLocator.ServiceNotFoundException).toBeTruthy();
         }
     });
 
-    it("get() should instance registered service", function(done) {
-        require(
-            ['ServiceLocator'],
-            function (ServiceLocator) {
-
-                var serviceLocator;
-
-                var Service1 = function() {
-                    this.bar = function(){};
-                    this.baz = function(){};
-                };
-
-                var Service2 = function() {
-                    this.foo = function(){};
-                    this.zoo = function(){};
-                };
-
-                var config = {
-                    'Service1': function(sl) {
-                        return new Service1();
-                    },
-                    'Service2': function(sl) {
-                        return new Service2();
-                    }
-                };
-                serviceLocator = new ServiceLocator(config);
-
-                var service1 = serviceLocator.get('Service1');
-                var service2 = serviceLocator.get('Service2');
-
-                expect(service1).toBeDefined();
-                expect(service2).toBeDefined();
-
-                expect(service1 instanceof Service1).toBeTruthy();
-                expect(service2 instanceof Service2).toBeTruthy();
-                done();
-            }
-        );
-
-    });
-
-    it("get() should instance registered service with resolved dependencies", function(done) {
-        require(
-            ['ServiceLocator'],
-            function (ServiceLocator) {
-
-                var serviceLocator2;
-
-                var Service1 = function() {
-                    this.bar = function(){};
-                    this.baz = function(){};
-                };
-
-                var Service2 = function(dependencyService1) {
-                    this.foo = function(){
-                        dependencyService1.bar();
-                    };
-                    this.zoo = function(){
-                        dependencyService1.baz();
-                    };
-                    this.getService1 = function(){
-                        return dependencyService1;
-                    };
-                };
-
-                var config = {
-                    'Service1': function(sl) {
-                        return new Service1();
-                    },
-                    'Service2': function(sl) {
-                        return new Service2(sl.get('Service1'));
-                    }
-                };
-                serviceLocator2 = new ServiceLocator(config);
-
-                var service1 = serviceLocator2.get('Service1');
-                var service2 = serviceLocator2.get('Service2');
-
-
-                expect(service1).toBeDefined();
-                expect(service2).toBeDefined();
-
-                expect(service1 instanceof Service1).toBeTruthy();
-                expect(service2 instanceof Service2).toBeTruthy();
-
-                expect(service2.getService1() instanceof Service1).toBeTruthy();
-                expect(service2.getService1()).toBe(service1);
-                done();
-            }
-        );
-
-    });
-
     it("resolve() should inject service with resolved dependencies to callback", function(done) {
         require(
-            ['ServiceLocator'],
-            function (ServiceLocator) {
-
-                var Service1 = function() {
-                    this.bar = function(){};
-                    this.baz = function(){};
-                };
-
-                var Service2 = function(dependencyService1) {
-                    this.foo = function(){
-                        dependencyService1.bar();
-                    };
-                    this.zoo = function(){
-                        dependencyService1.baz();
-                    };
-                    this.getService1 = function(){
-                        return dependencyService1;
-                    };
-                };
+            ['ServiceLocator', 'Status/StatusCollection', 'Status/Factory'],
+            function (ServiceLocator, StatusCollection, StatusFactory) {
 
                 var config = {
-                    'BoardView': function(sl) {
-                        return new BoardView();
+                    "Status/StatusCollection": function(sl) {
+                        var dfd = $.Deferred();
+                        require(["Status/StatusCollection"], function(StatusCollection){
+                            dfd.resolve(new StatusCollection());
+                        });
+                        return dfd.promise();
                     },
-                    'LoginView': function(sl) {
-                        return new LoginView(sl.get('BoardView'));
+                    "Status/Factory": function(sl){
+                        var dfd = $.Deferred();
+                        require(["Status/Factory"], function(StatusFactory){
+                            sl.resolve(["Status/StatusCollection"], function(statuses){ dfd.resolve(new StatusFactory(statuses)) });
+                        });
+                        return dfd.promise();
                     }
                 };
 
                 var serviceLocator = new ServiceLocator(config);
 
                 var app = {
-                    run: function(s1, s2) {}
+                    run: function(s1, s2) {
+                        expect(s1 instanceof StatusCollection).toBeTruthy();
+                        expect(s2 instanceof StatusFactory).toBeTruthy();
+                        done();
+                    }
                 };
 
-                spyOn(app, 'run');
+                serviceLocator.resolve(["Status/StatusCollection", "Status/Factory"], app.run, app);
+            }
+        );
 
-                serviceLocator.resolve(['BoardView', 'LoginView'], app.run);
+    });
 
-                expect(app.run).toHaveBeenCalledWith(
-                    serviceLocator.get('BoardView'),
-                    serviceLocator.get('LoginView')
-                );
-                done();
+    it("resolve() should inject service with resolved dependencies to callback without require", function(done) {
+        require(
+            ['ServiceLocator'],
+            function (ServiceLocator) {
+
+                var Service1 = function() {
+                    this.bar = function(){};
+                    this.baz = function(){};
+                };
+
+                var Service2 = function(dependencyService1) {
+                    this.foo = function(){
+                        dependencyService1.bar();
+                    };
+                    this.zoo = function(){
+                        dependencyService1.baz();
+                    };
+                    this.getService1 = function(){
+                        return dependencyService1;
+                    };
+                };
+
+                var config = {
+                    Service1: function(sl) {
+                        var dfd = $.Deferred();
+                        dfd.resolve(new Service1());
+                        return dfd.promise();
+                    },
+                    Service2: function(sl){
+                        var dfd = $.Deferred();
+                        sl.resolve(["Service1"], function(service1){ dfd.resolve(new Service2(service1)) });
+                        return dfd.promise();
+                    }
+                };
+
+                var serviceLocator = new ServiceLocator(config);
+
+                var app = {
+                    run: function(s1, s2) {
+                        expect(s1 instanceof Service1).toBeTruthy();
+                        expect(s2 instanceof Service2).toBeTruthy();
+                        done();
+                    }
+                };
+
+                serviceLocator.resolve(["Service1", "Service2"], app.run, app);
             }
         );
 

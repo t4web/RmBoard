@@ -3,7 +3,7 @@ ServiceLocator.ServiceNotFoundException = function() {};
 
 define(
     'ServiceLocator',
-    [],
+    ["underscore"],
     function () {
         'use strict';
 
@@ -27,42 +27,49 @@ define(
                 throw Error('Service locator: config must be specified');
             }
 
-            this.has = function(name) {
+            this.resolve = function(deps, callback, context){
+                var promises = [];
 
-            };
-
-            this.get = function(name) {
-                if (instances.hasOwnProperty(name)) {
-                    return instances[name];
+                if (typeof callback !== 'function') {
+                    throw new Error('Service locator: callback must be specified');
                 }
 
-                if (!config.hasOwnProperty(name)) {
-                    throw new ServiceLocator.ServiceNotFoundException('Service locator was unable to fetch or create an instance for ' + name);
-                }
+                _.each(deps, function(value){
 
-                var constructor = config[name];
+                    if (!config.hasOwnProperty(value)) {
+                        throw new ServiceLocator.ServiceNotFoundException('Service locator was unable to fetch or create an instance for ' + value);
+                    }
 
-                instances[name] = new constructor(this);
+                    var constructor = config[value];
 
-                return instances[name];
-            };
+                    var promise = constructor(this);
 
-            this.resolve = function(deps, callback){
-                require(deps, function(){
+                    promises.push(promise);
 
-                    var args = [];
+                }, this);
 
-                    _.each(deps, function(value){
-                        var d = require(value);
-console.log(value, d);
-                        var constructor = config[value];
+                if (promises.length > 0) {
+                    $.when.apply($, promises).then(function(){
+                        _.each(arguments, function(instance, key){
+                            instances[deps[key]] = instance;
+                        });
 
-                        instances[value] = new constructor(this);
-                        args.push(instances[value]);
+                        callbackApply(deps, callback, context);
                     });
+                } else {
+                    callbackApply(deps, callback, context);
+                }
 
-                    callback.apply(1, args);
+            };
+
+            var callbackApply = function(deps, callback, context) {
+                var callbackArguments = [];
+
+                _.each(deps, function(value){
+                    callbackArguments.push(instances[value]);
                 });
+
+                callback.apply(context, callbackArguments);
             };
         };
     }
