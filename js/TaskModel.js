@@ -16,13 +16,13 @@ define(
 
             mergedToTest: function() {
                 this.set('name', this.get('name') + ' [In Test]');
-                /*
+
                 $.ajax({
                     url: '/index.php?method=PUT&resource=/issues/' + this.get('id') + '.json',
                     data: { "issue": { "subject": this.get('name') } },
                     type: 'POST'
                 });
-                */
+                
             }
         });
 
