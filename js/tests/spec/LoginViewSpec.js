@@ -29,7 +29,7 @@ describe('Login View suite', function() {
             function (LoginView, TasksCollection) {
                 var spy = spyOn(LoginView.prototype, "showAuthorization");
 
-                var tasks = new TasksCollection();
+                var tasks = new TasksCollection([], {statusFactory:{}});
 
                 new LoginView({
                     tasks: tasks
@@ -48,7 +48,7 @@ describe('Login View suite', function() {
             function (LoginView, TasksCollection) {
                 var spy = spyOn(LoginView.prototype, "showAuthorization");
 
-                var tasks = new TasksCollection();
+                var tasks = new TasksCollection([], {statusFactory:{}});
 
                 new LoginView({
                     tasks: tasks

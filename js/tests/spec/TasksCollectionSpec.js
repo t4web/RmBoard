@@ -4,11 +4,20 @@ describe('Tasks Collection suite', function () {
     // Use require.js to fetch the module
     it("should load the AMD module", function (done) {
         require(
-            ['TasksCollection'],
-            function (TasksCollection) {
-                tasks = new TasksCollection();
-                expect(tasks).toBeDefined();
-                done();
+            ['TasksCollection', 'ServiceLocator', 'ServiceLocatorConfig'],
+            function (TasksCollection, ServiceLocator, slConfig) {
+                expect(typeof TasksCollection == 'function').toBeTruthy();
+
+                var serviceLocator = new ServiceLocator(slConfig);
+
+                var app = {
+                    run: function(resolvedTasks) {
+                        tasks = resolvedTasks;
+                        done();
+                    }
+                };
+
+                serviceLocator.resolve(["TasksCollection"], app.run, app);
             }
         );
     });

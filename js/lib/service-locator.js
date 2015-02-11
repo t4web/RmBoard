@@ -11,11 +11,22 @@ define(
          * @param object config
          * var config =
          * {
-         *      'Service1': function(serviceLocator) {
-         *          return new Service1();
+         *      "Status/Factory": function(sl){
+         *          var dfd = $.Deferred();
+         *          require(["Status/Factory"], function(StatusFactory){
+         *              dfd.resolve(new StatusFactory());
+         *          });
+         *          return dfd.promise();
          *      },
-         *      'Service2': function(serviceLocator) {
-         *          return new Service2(serviceLocator.get('Service1'));
+         *
+         *      TasksCollection: function(sl){
+         *          var dfd = $.Deferred();
+         *          require(["TasksCollection"], function(TasksCollection){
+         *              sl.resolve(["Status/Factory"], function(statusFactory){
+         *                  dfd.resolve(new TasksCollection([], {statusFactory: statusFactory}));
+         *              });
+         *          });
+         *          return dfd.promise();
          *      },
          * }
          * @throws ServiceLocator.ServiceNotFoundException
@@ -28,8 +39,6 @@ define(
             }
 
             this.resolve = function(deps, callback, context){
-                var promises = [];
-
                 if (typeof callback !== 'function') {
                     throw new Error('Service locator: callback must be specified');
                 }
@@ -40,36 +49,50 @@ define(
                         throw new ServiceLocator.ServiceNotFoundException('Service locator was unable to fetch or create an instance for ' + value);
                     }
 
+                    if (instances.hasOwnProperty(value)) {
+                        return;
+                    }
+
                     var constructor = config[value];
 
                     var promise = constructor(this);
 
-                    promises.push(promise);
+                    instances[value] = promise;
+
+                    $.when(promise).then(function(instance){
+                        instances[value] = instance;
+                    });
 
                 }, this);
 
-                if (promises.length > 0) {
-                    $.when.apply($, promises).then(function(){
-                        _.each(arguments, function(instance, key){
-                            instances[deps[key]] = instance;
-                        });
-
-                        callbackApply(deps, callback, context);
-                    });
-                } else {
-                    callbackApply(deps, callback, context);
-                }
-
+                callbackApply(deps, callback, context);
             };
 
             var callbackApply = function(deps, callback, context) {
                 var callbackArguments = [];
+                var promises = [];
 
                 _.each(deps, function(value){
+                    if (isPromise(instances[value])) {
+                        promises.push(instances[value]);
+                        return;
+                    }
+
                     callbackArguments.push(instances[value]);
                 });
 
+                if (promises.length > 0) {
+                    $.when.apply($, promises).then(function() {
+                        callbackApply(deps, callback, context);
+                    });
+                    return;
+                }
+
                 callback.apply(context, callbackArguments);
+            };
+
+            var isPromise = function(value) {
+                return (typeof value.then == 'function');
             };
         };
     }

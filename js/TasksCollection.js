@@ -1,7 +1,7 @@
 define(
     'TasksCollection',
-    ["backbone", "TaskModel", "Status/Factory"],
-    function (Backbone, TaskModel, StatusFactory) {
+    ["backbone", "TaskModel"],
+    function (Backbone, TaskModel) {
         'use strict';
 
         var TasksCollection = Backbone.Collection.extend({
@@ -9,19 +9,17 @@ define(
             url: '/index.php?resource=/issues.json?limit=100',
             statusFactory: null,
 
-            initialize: function(options) {
-                //this.statusFactory = options.statusFactory;
+            initialize: function(models, options) {
+                this.statusFactory = options.statusFactory;
             },
 
-            parse: function(response, options) {
+            parse: function(response) {
                 var rawTasks = [];
 
                 if (response.issues.length == 0) {
                     this.trigger('empty-issues');
                     return rawTasks;
                 }
-
-                var statusFactory = new StatusFactory();
 
                 _.each(response.issues, function(value){
 
@@ -48,8 +46,7 @@ define(
                         return;
                     }
 
-                    //var status = this.statusFactory.create(value.status.id, value.subject);
-                    var status = statusFactory.create(value.status.id, value.subject);
+                    var status = this.statusFactory.create(value.status.id, value.subject);
 
                     rawTasks.push({
                         id: value.id,

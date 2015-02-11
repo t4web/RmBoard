@@ -4,11 +4,20 @@ describe('Status/Factory suite', function() {
     // Use require.js to fetch the module
     it("should load the AMD module", function(done) {
         require(
-            ['Status/Factory'],
-            function (Factory) {
-                factory = new Factory();
-                expect(factory).toBeDefined();
-                done();
+            ['Status/Factory', 'ServiceLocator', 'ServiceLocatorConfig'],
+            function (Factory, ServiceLocator, slConfig) {
+                expect(typeof Factory == 'function').toBeTruthy();
+
+                var serviceLocator = new ServiceLocator(slConfig);
+
+                var app = {
+                    run: function(resolvedStatusFactory) {
+                        factory = resolvedStatusFactory;
+                        done();
+                    }
+                };
+
+                serviceLocator.resolve(["Status/Factory"], app.run, app);
             }
         );
     });

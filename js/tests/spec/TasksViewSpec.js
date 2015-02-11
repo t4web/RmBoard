@@ -26,7 +26,7 @@ describe('Tasks View suite', function() {
             function (TasksView, TasksCollection) {
                 var spyOnRender = spyOn(TasksView.prototype, "render");
 
-                var tasks = new TasksCollection();
+                var tasks = new TasksCollection([], {statusFactory:{}});
 
                 new TasksView({
                     status: 'XXX',
