@@ -1,7 +1,7 @@
 define(
     'TasksView',
-    ["backbone", "template/task"],
-    function(Backbone, taskTpl) {
+    ["backbone", "TaskView"],
+    function(Backbone, TaskView) {
         'use strict';
 
         var TasksView = Backbone.View.extend({
@@ -22,12 +22,11 @@ define(
                 
                 var tasks = this.tasks.where({status: this.status});
 
-                var template = _.template(taskTpl);
-
                 this.$el.html('');
 
                 _.each(tasks, function(task){
-                    this.$el.append(template(task.toJSON()));
+                    var view = new TaskView({ model: task });
+                    this.$el.append(view.render().el);
                 }, this);
             }
 

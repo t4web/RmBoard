@@ -1,5 +1,4 @@
 describe('Tasks View suite', function() {
-    var loginView;
     var tasks;
 
     // Use require.js to fetch the module

@@ -3563,3 +3563,7 @@ fieldset[disabled] .btn-vk.active {
 #done .box .box-header .box-title {
     cursor: move;
 }
+
+#columns .box .box-header .box-title {
+    font-size: 14px;
+}

@@ -66,7 +66,6 @@ define(
                     stop: function( event, ui ) {
                         var taskEl = ui.item;
                         var model = _this.tasks.get(taskEl.attr('id'));
-                        _this.listenTo(model, 'change:name', _this.onChangeName);
                         model.mergedToTest();
                     }
                 }).disableSelection();
@@ -88,10 +87,6 @@ define(
                     forcePlaceholderSize: true,
                     zIndex: 999999
                 }).disableSelection();
-            },
-
-            onChangeName: function(model) {
-                $('#' + model.get('id') + ' h3').text(model.get('name'));
             }
 
         });

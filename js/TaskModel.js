@@ -22,7 +22,7 @@ define(
                     data: { "issue": { "subject": this.get('name') } },
                     type: 'POST'
                 });
-                
+
             }
         });
 
