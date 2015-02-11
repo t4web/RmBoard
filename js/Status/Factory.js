@@ -5,12 +5,20 @@ define(
         'use strict';
 
         return function (statuses) {
-            //var statuses;
-
+            var statuses = new StatusCollection([
+                {id: 1, name: "To do"},
+                {id: 2, name: "In progress"},
+                {id: 3, name: "Ready fo test"},
+                {id: 31, name: "In Test"},
+                {id: 32, name: "Ready for prod"},
+                {id: 33, name: "In prod"},
+                {id: 5, name: "Done"}
+            ])
+/*
             if (!(statuses instanceof StatusCollection)) {
                 throw new Error("Statuses must be instance of StatusCollection.");
             }
-
+*/
             /*
              <option selected="selected" value="1">Новая</option>
              <option value="2">В работе</option>

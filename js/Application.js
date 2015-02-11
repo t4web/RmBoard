@@ -29,7 +29,7 @@ var app = {
 };
 
 require(
-    ["ServiceLocator"],
+    ["ServiceLocator", "ServiceLocatorConfig"],
     function ( ServiceLocator ) {
 
         var config = {
@@ -55,7 +55,6 @@ require(
 
                 $.when( require(['BoardView'], callback) ).done(callback);
 
-console.log(b);
                 /*
                 var dfd = $.Deferred();
                 //var BoardView = require('BoardView');
@@ -67,7 +66,6 @@ console.log(b);
                     b = n;
                     console.log(n);
                 });
-//console.log(b);
                 return b;
                 //return new BoardView({
                 //    tasks: sl.get("TasksCollection")

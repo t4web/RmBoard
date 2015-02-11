@@ -10,7 +10,7 @@ define(
             statusFactory: null,
 
             initialize: function(options) {
-                this.statusFactory = options.statusFactory;
+                //this.statusFactory = options.statusFactory;
             },
 
             parse: function(response, options) {
@@ -21,7 +21,7 @@ define(
                     return rawTasks;
                 }
 
-                //var statusFactory = new StatusFactory();
+                var statusFactory = new StatusFactory();
 
                 _.each(response.issues, function(value){
 
@@ -48,7 +48,8 @@ define(
                         return;
                     }
 
-                    var status = this.statusFactory.create(value.status.id, value.subject);
+                    //var status = this.statusFactory.create(value.status.id, value.subject);
+                    var status = statusFactory.create(value.status.id, value.subject);
 
                     rawTasks.push({
                         id: value.id,
