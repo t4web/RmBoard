@@ -4,6 +4,16 @@ define(
     function(Backbone, TaskView) {
         'use strict';
 
+        function sortByAssignee(task1, task2) {
+            if (task1.get('assignee').id < task2.get('assignee').id) {
+                return -1;
+            } else if (task1.get('assignee').id > task2.get('assignee').id) {
+                return 1;
+            }
+
+            return 0;
+        }
+
         var TasksView = Backbone.View.extend({
 
             tasks: null,
@@ -21,6 +31,10 @@ define(
                 this.$el = $('#' + this.id);
                 
                 var tasks = this.tasks.where({status: this.status});
+
+                if (this.status == 2) {
+                    tasks.sort(sortByAssignee);
+                }
 
                 this.$el.html('');
 

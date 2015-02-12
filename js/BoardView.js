@@ -4,7 +4,7 @@ define(
     function(Backbone, NProgress, boardTpl, TasksView) {
         'use strict';
 
-        var BoardView = Backbone.View.extend({
+        return Backbone.View.extend({
 
             tasks: null,
             className: 'wrapper row-offcanvas',
@@ -34,8 +34,6 @@ define(
 
                 this.$el.html(template());
 
-                this.trigger('render:complete');
-
                 this.refresh();
 
                 return this;
@@ -53,46 +51,8 @@ define(
             stopLoader: function() {
                 NProgress.done();
                 $('button#refresh-btn').removeAttr('disabled');
-
-                // http://api.jqueryui.com/sortable
-
-                var _this = this;
-
-                //$("#ready-for-merge-test").sortable({
-                //    placeholder: "sort-highlight",
-                //    connectWith: "#in-test",
-                //    handle: ".box-header",
-                //    forcePlaceholderSize: true,
-                //    zIndex: 999999,
-                //    start: function( event, ui ) {console.log('start');},
-                //    stop: function( event, ui ) {
-                //        var taskEl = ui.item;
-                //        var model = _this.tasks.get(taskEl.attr('id'));
-                //        model.mergedToTest();
-                //    }
-                //}).disableSelection();
-
-                //$("#in-test").sortable({
-                //    placeholder: "sort-highlight",
-                //    connectWith: "#ready-for-merge",
-                //    handle: ".box-header",
-                //    forcePlaceholderSize: true,
-                //    zIndex: 999999,
-                //    start: function( event, ui ) {console.log('start');},
-                //    stop: function( event, ui ) {console.log('stop');}
-                //}).disableSelection();
-                //
-                //$("#ready-for-merge").sortable({
-                //    placeholder: "sort-highlight",
-                //    connectWith: "#in-prod",
-                //    handle: ".box-header",
-                //    forcePlaceholderSize: true,
-                //    zIndex: 999999
-                //}).disableSelection();
             }
 
         });
-
-        return BoardView;
     }
 );
