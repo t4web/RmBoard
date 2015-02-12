@@ -16,35 +16,35 @@ define([], function() {
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            In progress\n\
+                            In progress <a href="<%=app.getConfig(\'links.in-progress\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>В работе</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            Ready for merge on test\n\
+                            Ready for merge on test <a href="<%=app.getConfig(\'links.ready-for-test\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>Решена, нужно смерджить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            In Test\n\
+                            In Test <a href="<%=app.getConfig(\'links.in-test\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>Решена, нужно проверить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            Ready for merge on prod\n\
+                            Ready for merge on prod <a href="<%=app.getConfig(\'links.ready-for-prod\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>Решена, нужно смерджить на прод</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
-                            In prod\n\
+                            In prod <a href="<%=app.getConfig(\'links.in-prod\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>Решена, нужно проверить на прод</small>\n\
                         </h1>\n\
                     </div>\n\
