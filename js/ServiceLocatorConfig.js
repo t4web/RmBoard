@@ -1,5 +1,24 @@
 define([], function() {
     return {
+        "Assignee/Collection": function(sl) {
+            var dfd = $.Deferred();
+            require(["backbone"], function(Backbone){
+                dfd.resolve(new Backbone.Collection(
+                    [
+                        {id: 27, name: "Ярослав Подорванов", nick: "VL", colorClass: "label-danger" },
+                        {id: 14, name: "Максим Гултурян", nick: "MG", colorClass: "label-success" },
+                        {id: 16, name: "Дмитрий Кирилов", nick: "DK", colorClass: "label-info" },
+                        {id: 15, name: "Артем Гуржий", nick: "AM", colorClass: "label-warning" },
+                    ],
+                    {
+                        model: Backbone.Model.extend({
+                            defaults: { id: null, name: null, nick: null, colorClass: "label-danger" }
+                        })
+                    }));
+            });
+            return dfd.promise();
+        },
+
         "Status/StatusCollection": function(sl) {
             var dfd = $.Deferred();
             require(["Status/StatusCollection"], function(StatusCollection){
@@ -27,8 +46,8 @@ define([], function() {
         TasksCollection: function(sl){
             var dfd = $.Deferred();
             require(["TasksCollection"], function(TasksCollection){
-                sl.resolve(["Status/Factory"], function(statusFactory){
-                    dfd.resolve(new TasksCollection([], {statusFactory: statusFactory}));
+                sl.resolve(["Status/Factory", "Assignee/Collection"], function(statusFactory, assignees){
+                    dfd.resolve(new TasksCollection([], {statusFactory: statusFactory, assignees: assignees}));
                 });
             });
             return dfd.promise();

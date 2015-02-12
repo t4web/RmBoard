@@ -32,6 +32,27 @@ describe('Service locator config suite', function() {
 
     });
 
+    it("should resolve Assignee/Collection", function(done) {
+        require(
+            ['ServiceLocator', 'ServiceLocatorConfig', 'backbone'],
+            function (ServiceLocator, slConfig, Backbone) {
+
+                var serviceLocator = new ServiceLocator(slConfig);
+
+                var app = {
+                    run: function(assignees) {
+                        expect(assignees instanceof Backbone.Collection).toBeTruthy();
+                        expect(assignees.length).toEqual(4);
+                        done();
+                    }
+                };
+
+                serviceLocator.resolve(["Assignee/Collection"], app.run, app);
+            }
+        );
+
+    });
+
     it("should resolve Status/Factory", function(done) {
         require(
             ['ServiceLocator', 'ServiceLocatorConfig', 'Status/Factory'],
@@ -54,14 +75,15 @@ describe('Service locator config suite', function() {
 
     it("should resolve TasksCollection", function(done) {
         require(
-            ['ServiceLocator', 'ServiceLocatorConfig', 'TasksCollection', 'Status/Factory'],
-            function (ServiceLocator, slConfig, TasksCollection, StatusFactory) {
+            ['ServiceLocator', 'ServiceLocatorConfig', 'TasksCollection', 'backbone', 'Status/Factory'],
+            function (ServiceLocator, slConfig, TasksCollection, Backbone, StatusFactory) {
 
                 var serviceLocator = new ServiceLocator(slConfig);
 
                 var app = {
                     run: function(tasks) {
                         expect(tasks instanceof TasksCollection).toBeTruthy();
+                        expect(tasks.assignees instanceof Backbone.Collection).toBeTruthy();
                         expect(tasks.statusFactory instanceof StatusFactory).toBeTruthy();
                         done();
                     }

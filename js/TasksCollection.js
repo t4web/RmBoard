@@ -8,9 +8,11 @@ define(
             model: TaskModel,
             url: '/index.php?resource=/issues.json?limit=100',
             statusFactory: null,
+            assignees: null,
 
             initialize: function(models, options) {
                 this.statusFactory = options.statusFactory;
+                this.assignees = options.assignees;
             },
 
             parse: function(response) {
@@ -47,11 +49,16 @@ define(
                     }
 
                     var status = this.statusFactory.create(value.status.id, value.subject);
+                    var assignee = this.assignees.get(value.assigned_to.id);
+
+                    if (typeof(assignee) == "undefined") {
+                        return;
+                    }
 
                     rawTasks.push({
                         id: value.id,
                         name: value.subject,
-                        assignee: value.assigned_to.name,
+                        assignee: assignee.toJSON(),
                         status: status.get('id'),
                         type: value.tracker.id,
                         colorClass: colorClass

@@ -83,7 +83,7 @@ describe('Tasks Collection suite', function () {
             {
                 id: 5457,
                 name: 'subject 1',
-                assignee: 'Mickey',
+                assignee: { id: 14, name: 'Максим Гултурян', nick: 'MG', colorClass: 'label-success' },
                 status: 1,
                 type: 1,
                 colorClass: 'bg-red'
@@ -145,68 +145,13 @@ describe('Tasks Collection suite', function () {
 
         expect(parsedData).toEqual([]);
     });
-/*
-    it("parse should inject Status object", function () {
-        var parsedData;
-        var response =
-            '{' +
-                '"total_count":1457,' +
-                '"limit":25,' +
-                '"issues":' +
-                '[' +
-                    '{' +
-                        '"status":' +
-                        '{' +
-                            '"name":"\u041d\u043e\u0432\u0430\u044f",' +
-                            '"id":1' +
-                        '},' +
-                        '"tracker":' +
-                        '{' +
-                            '"name":"\u041e\u0448\u0438\u0431\u043a\u0430",' +
-                            '"id":1' +
-                        '},' +
-                        '"updated_on":"2015/01/26 17:17:07 +0200",' +
-                        '"description":"",' +
-                        '"subject":"subject 1",' +
-                        '"start_date":"2015/01/26",' +
-                        '"author":' +
-                        '{' +
-                            '"name":"Donald",' +
-                            '"id":19' +
-                        '},' +
-                        '"done_ratio":0,' +
-                        '"project":' +
-                        '{' +
-                            '"name":"Project name",' +
-                            '"id":3' +
-                        '},' +
-                        '"created_on":"2015/01/26 17:15:14 +0200",' +
-                        '"id":5457,' +
-                        '"parent":' +
-                        '{' +
-                            '"id":5444' +
-                        '},' +
-                        '"priority":' +
-                        '{' +
-                            '"name":"\u041d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u044b\u0439",' +
-                            '"id":4' +
-                        '}' +
-                    '}' +
-            '],' +
-            '"offset":0' +
-        '}';
 
-        parsedData = tasks.parse(JSON.parse(response));
-
-        expect(parsedData[0].status).toEqual([]);
-    });
-*/
     it("fetch should trigger 'before' event", function () {
         var handler = jasmine.createSpy('event');
         tasks.on('fetch:before', handler);
 
         spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
-            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"name":"name"},"status":{"id":1},"tracker":1}],"offset":0});
+            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"id":14},"status":{"id":1},"tracker":1}],"offset":0});
         });
 
         tasks.fetch();
@@ -219,7 +164,7 @@ describe('Tasks Collection suite', function () {
         tasks.on('fetch:success', handler);
 
         spyOn(Backbone, 'sync').and.callFake(function(method, collection, options) {
-            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"name":"name"},"status":{"id":1},"tracker":1}],"offset":0});
+            options.success({"total_count":1459,"limit":25,"issues":[{"id":123,"subject":"subject","assigned_to":{"id":14},"status":{"id":1},"tracker":1}],"offset":0});
         });
 
         tasks.fetch();
