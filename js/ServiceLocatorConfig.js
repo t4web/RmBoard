@@ -8,8 +8,8 @@ define([], function() {
                     {id: 2, name: "In progress"},
                     {id: 3, name: "Ready fo test"},
                     {id: 31, name: "In Test"},
-                    {id: 32, name: "Ready for prod"},
-                    {id: 33, name: "In prod"},
+                    {id: 32, name: "Ready for Prod"},
+                    {id: 33, name: "In Prod"},
                     {id: 5, name: "Done"}
                 ]));
             });

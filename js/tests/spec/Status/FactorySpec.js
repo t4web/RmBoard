@@ -58,15 +58,15 @@ describe('Status/Factory suite', function() {
         expect(status.toJSON()).toEqual({id: 31, name: "In Test"});
     });
 
-    it("create should return status object [Ready for prod] if taskName contain '[Ready for prod]'", function() {
-        var status = factory.create(1, 'bla-bla bla [Ready for prod]');
+    it("create should return status object [Ready for Prod] if taskName contain '[Ready for Prod]'", function() {
+        var status = factory.create(1, 'bla-bla bla [Ready for Prod]');
 
-        expect(status.toJSON()).toEqual({id: 32, name: "Ready for prod"});
+        expect(status.toJSON()).toEqual({id: 32, name: "Ready for Prod"});
     });
 
-    it("create should return status object [In prod] if taskName contain '[In prod]'", function() {
-        var status = factory.create(1, 'bla-bla bla [In prod]');
+    it("create should return status object [In Prod] if taskName contain '[In Prod]'", function() {
+        var status = factory.create(1, 'bla-bla bla [In Prod]');
 
-        expect(status.toJSON()).toEqual({id: 33, name: "In prod"});
+        expect(status.toJSON()).toEqual({id: 33, name: "In Prod"});
     });
 });
