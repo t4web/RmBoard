@@ -91,7 +91,6 @@ describe('Service locator config suite', function() {
                 serviceLocator.resolve(["BoardView"], app.run, app);
             }
         );
-
     });
 
     it("should resolve LoginView", function(done) {
@@ -112,10 +111,28 @@ describe('Service locator config suite', function() {
                 serviceLocator.resolve(["LoginView"], app.run, app);
             }
         );
-
     });
 
-    it("should return same instance", function(done) {
+    it("should resolve ColumnsRelationsService", function(done) {
+        require(
+            ['ServiceLocator', 'ServiceLocatorConfig', 'ColumnsRelationsService'],
+            function (ServiceLocator, slConfig, ColumnsRelationsService) {
+
+                var serviceLocator = new ServiceLocator(slConfig);
+
+                var app = {
+                    run: function(service) {
+                        expect(service instanceof ColumnsRelationsService).toBeTruthy();
+                        done();
+                    }
+                };
+
+                serviceLocator.resolve(["ColumnsRelationsService"], app.run, app);
+            }
+        );
+    });
+
+    it("should return same instance and callback should not call twice", function(done) {
         require(
             ['ServiceLocator', 'ServiceLocatorConfig'],
             function (ServiceLocator, slConfig) {

@@ -50,7 +50,7 @@ describe('Board suite', function() {
         });
 
         it("'Ready for merge' column should exists", function() {
-            expect($(boardView.el).find('#ready-for-merge')).toExist();
+            expect($(boardView.el).find('#ready-for-prod')).toExist();
         });
 
         it("'In prod' column should exists", function() {

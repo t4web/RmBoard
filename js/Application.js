@@ -2,9 +2,11 @@ var app = {
 
     config: [],
 
-    run: function(board, loginForm) {
+    run: function(board, loginForm, columnsRelations) {
         $('body').prepend(board.render().el);
         $('body').append(loginForm.render().el);
+
+        //columnsRelations.init();
     },
 
     getConfig: function(variableName) {
@@ -35,6 +37,6 @@ require(
 
         var serviceLocator = new ServiceLocator(slConfig);
 
-        serviceLocator.resolve(["BoardView", "LoginView"], app.run, app);
+        serviceLocator.resolve(["BoardView", "LoginView", "ColumnsRelationsService"], app.run, app);
     }
 );

@@ -53,5 +53,15 @@ define([], function() {
             });
             return dfd.promise();
         },
+
+        "ColumnsRelationsService": function(sl) {
+            var dfd = $.Deferred();
+            require(["ColumnsRelationsService"], function(ColumnsRelationsService){
+                sl.resolve(["TasksCollection"], function(tasks){
+                    dfd.resolve(new ColumnsRelationsService(tasks));
+                });
+            });
+            return dfd.promise();
+        }
     };
 });

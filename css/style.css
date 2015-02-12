@@ -3550,15 +3550,15 @@ fieldset[disabled] .btn-vk.active {
     right: 100px;
 }
 
-#to-do, #in-progress, #in-test, #ready-for-merge, #in-prod, #done {
+#to-do, #in-progress, #in-test, #ready-for-prod, #in-prod, #done {
     min-height: 800px;
 }
 
 #to-do .box .box-header .box-title,
 #in-progress .box .box-header .box-title,
-#ready-for-merge-test .box .box-header .box-title,
+#ready-for-test .box .box-header .box-title,
 #in-test .box .box-header .box-title,
-#ready-for-merge .box .box-header .box-title,
+#ready-for-prod .box .box-header .box-title,
 #in-prod .box .box-header .box-title,
 #done .box .box-header .box-title {
     cursor: move;

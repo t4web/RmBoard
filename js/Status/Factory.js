@@ -33,10 +33,10 @@ define(
                 if (taskName.indexOf('[In Test]') >= 0) {
                     status = statuses.get(31);
                 }
-                if (taskName.indexOf('[Ready for prod]') >= 0) {
+                if (taskName.indexOf('[Ready for Prod]') >= 0) {
                     status = statuses.get(32);
                 }
-                if (taskName.indexOf('[In prod]') >= 0) {
+                if (taskName.indexOf('[In Prod]') >= 0) {
                     status = statuses.get(33);
                 }
 
