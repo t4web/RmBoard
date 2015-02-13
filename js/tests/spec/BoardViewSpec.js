@@ -24,7 +24,9 @@ describe('Board suite', function() {
     });
 
     describe('Rendering', function() {
+
         beforeEach(function(){
+            app = jasmine.createSpyObj('app', ['getConfig']);
             boardView.render();
         });
 
