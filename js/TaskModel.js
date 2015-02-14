@@ -5,11 +5,13 @@ define(
         'use strict';
 
         function updateTask(id, name, statusId) {
-            $.ajax({
-                url: '/index.php?method=PUT&resource=/issues/' + id + '.json',
-                data: { issue: { subject: name, status_id: statusId } },
-                type: 'POST'
-            });
+            if (window.location.hostname != 'localhost') {
+                $.ajax({
+                    url: '/index.php?method=PUT&resource=/issues/' + id + '.json',
+                    data: {issue: {subject: name, status_id: statusId}},
+                    type: 'POST'
+                });
+            }
         }
 
         function clearAllMarkers(name) {

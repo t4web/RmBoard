@@ -4,6 +4,8 @@ $config = require_once 'config.php';
 
 header('Content-type: application/json');
 
+$_GET['resource'] = str_replace('AND', '&', $_GET['resource']);
+
 if ($_GET['resource'] == 'get-config') {
     echo json_encode($config);
     exit;

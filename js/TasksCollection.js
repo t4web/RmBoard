@@ -6,7 +6,7 @@ define(
 
         var TasksCollection = Backbone.Collection.extend({
             model: TaskModel,
-            url: '/index.php?resource=/issues.json?limit=100',
+            url: '/index.php?resource=/issues.json?limit=100ANDsort=updated_on:desc',
             statusFactory: null,
             assignees: null,
 
