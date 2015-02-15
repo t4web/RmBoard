@@ -1,7 +1,7 @@
 define(
     'BoardView',
-    ["backbone", "lib/nprogress/nprogress", "template/board", "TasksView"],
-    function(Backbone, NProgress, boardTpl, TasksView) {
+    ["backbone", "lib/nprogress/nprogress", "template/board", "TasksView", "template/confirm"],
+    function(Backbone, NProgress, boardTpl, TasksView, confirmTpl) {
         'use strict';
 
         return Backbone.View.extend({
@@ -11,7 +11,8 @@ define(
             columns: [],
 
             events: {
-                "click button#refresh-btn": "refresh"
+                "click button#refresh-btn": "refresh",
+                "click a#deploy-all-on-test": "deployOnTest"
             },
 
             initialize: function(options) {
@@ -33,6 +34,7 @@ define(
                 new TasksView({id: 'done', status: 5, tasks: this.tasks});
 
                 this.$el.html(template());
+                $('body').append(_.template(confirmTpl)());
 
                 this.refresh();
 
@@ -51,6 +53,10 @@ define(
             stopLoader: function() {
                 NProgress.done();
                 $('button#refresh-btn').removeAttr('disabled');
+            },
+
+            deployOnTest: function() {
+                $('#confirm').modal();
             }
 
         });

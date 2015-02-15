@@ -24,6 +24,7 @@ define([], function() {
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
                             Ready for merge on test <a href="<%=app.getConfig(\'links.ready-for-test\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
+                            <a href="javascript:void(0);" id="deploy-all-on-test"><i class="fa fa-sign-out"></i></a>\n\
                             <small>Решена, нужно смерджить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
