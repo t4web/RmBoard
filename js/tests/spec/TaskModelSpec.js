@@ -1,6 +1,10 @@
 describe('Task Model suite', function () {
     var TaskModel;
 
+    beforeEach(function(){
+        spyOn($, 'ajax').and.callFake(function() { return; });
+    });
+
     // Use require.js to fetch the module
     it("should load the AMD module", function (done) {
         require(
