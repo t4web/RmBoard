@@ -32,6 +32,8 @@ define(
                 
                 var tasks = this.tasks.where({status: this.status});
 
+                //console.log(this.status, tasks);
+
                 if (this.status == 2) {
                     tasks.sort(sortByAssignee);
                 }

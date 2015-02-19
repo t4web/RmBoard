@@ -3567,3 +3567,7 @@ fieldset[disabled] .btn-vk.active {
 #columns .box .box-header .box-title {
     font-size: 14px;
 }
+
+body.modal-open {
+    padding-right: 0px !important;
+}

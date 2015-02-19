@@ -56,8 +56,8 @@ define([], function() {
         BoardView: function(sl){
             var dfd = $.Deferred();
             require(["BoardView"], function(BoardView){
-                sl.resolve(["TasksCollection"], function(tasks){
-                    dfd.resolve(new BoardView({tasks: tasks}));
+                sl.resolve(["TasksCollection", "ConfirmView"], function(tasks, confirm){
+                    dfd.resolve(new BoardView({tasks: tasks, confirm: confirm}));
                 });
             });
             return dfd.promise();
@@ -69,6 +69,14 @@ define([], function() {
                 sl.resolve(["TasksCollection"], function(tasks){
                     dfd.resolve(new LoginView({tasks: tasks}));
                 });
+            });
+            return dfd.promise();
+        },
+
+        ConfirmView: function(sl){
+            var dfd = $.Deferred();
+            require(["ConfirmView"], function(ConfirmView){
+                dfd.resolve(new ConfirmView());
             });
             return dfd.promise();
         },

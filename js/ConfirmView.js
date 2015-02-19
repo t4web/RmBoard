@@ -6,17 +6,18 @@ define(
 
         return Backbone.View.extend({
 
-            acceptCallback: null,
             id: 'confirm',
             className: 'modal fade',
             attributes: { role: "dialog" },
             options: {
                 message: "Are you sure?",
-                acceptBtnText: "Yes"
+                acceptBtnText: "Yes",
+                dismissBtnText: "Cancel",
+                acceptCallback: function(){}
             },
 
             events: {
-                "click #confirm .btn-primary": "accept"
+                "click button.btn-primary": "accept"
             },
 
             render: function() {
@@ -28,19 +29,14 @@ define(
             },
 
             show: function(options) {
-                this.options = options;
+                this.options = _.extend(this.options, options);
                 this.render();
                 this.$el.modal();
             },
 
             accept: function() {
-                var authToken = $('#auth-token').val();
-
-                if (authToken.length > 0) {
-                    $.cookie('auth_token', authToken);
-                }
-
-                this.reload();
+                this.options.acceptCallback();
+                this.$el.modal('hide');
             }
 
         });

@@ -5,8 +5,6 @@ var app = {
     run: function(board, loginForm, columnsRelations) {
         $('body').prepend(board.render().el);
         $('body').append(loginForm.render().el);
-
-        //columnsRelations.init();
     },
 
     getConfig: function(variableName) {
