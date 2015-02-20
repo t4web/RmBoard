@@ -3550,8 +3550,9 @@ fieldset[disabled] .btn-vk.active {
     right: 100px;
 }
 
-#to-do, #in-progress, #in-test, #ready-for-prod, #in-prod, #done {
+#to-do, #in-progress, #ready-for-test, #in-test, #ready-for-prod, #in-prod, #done {
     min-height: 800px;
+    padding-top: 15px;
 }
 
 #to-do .box .box-header .box-title,
@@ -3572,6 +3573,16 @@ body.modal-open {
     padding-right: 0px !important;
 }
 
-.highlight {
-    border: 1px #000000 solid;
+#to-do.highlight,
+#in-progress.highlight,
+#ready-for-test.highlight,
+#in-test.highlight,
+#ready-for-prod.highlight,
+#in-prod.highlight,
+#done.highlight {
+    background: none repeat scroll 0 0 #f1f1f1;
+    border: 1px dashed #ccc;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 14px;
 }
