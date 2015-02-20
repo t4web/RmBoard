@@ -58,6 +58,20 @@ define(
             stopLoader: function() {
                 NProgress.done();
                 $('button#refresh-btn').removeAttr('disabled');
+
+                var _this = this;
+                setTimeout(function() {
+                    var maxHeight = _this.columns['to-do'].getHeight();
+                    _.each(_this.columns, function (view, id) {
+                        if (maxHeight < view.getHeight()) {
+                            maxHeight = view.getHeight();
+                        }
+                    });
+                    console.log(maxHeight);
+                    _.each(_this.columns, function (view, id) {
+                        view.$el.height(maxHeight);
+                    });
+                }, 1000);
             },
 
             progressLoader: function(percent) {

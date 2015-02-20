@@ -3571,3 +3571,7 @@ fieldset[disabled] .btn-vk.active {
 body.modal-open {
     padding-right: 0px !important;
 }
+
+.highlight {
+    border: 1px #000000 solid;
+}

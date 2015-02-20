@@ -65,6 +65,9 @@ define(
                     handle: ".box-header",
                     forcePlaceholderSize: true,
                     zIndex: 999999,
+                    start: function( event, ui ) {
+                        $('.from-in-test').addClass('highlight');
+                    },
                     stop: function( event, ui ) {
                         var taskEl = ui.item;
                         var model = tasks.get(taskEl.attr('id'));
@@ -75,6 +78,8 @@ define(
                         } else if (newStatus == 'in-progress') {
                             model.inProgress();
                         }
+
+                        $('.from-in-test').removeClass('highlight');
                     }
                 }).disableSelection();
 

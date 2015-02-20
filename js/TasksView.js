@@ -32,8 +32,6 @@ define(
                 
                 var tasks = this.tasks.where({status: this.status});
 
-                //console.log(this.status, tasks);
-
                 if (this.status == 2) {
                     tasks.sort(sortByAssignee);
                 }
@@ -44,6 +42,10 @@ define(
                     var view = new TaskView({ model: task });
                     this.$el.append(view.render().el);
                 }, this);
+            },
+
+            getHeight: function() {
+                return this.$el.height();
             }
 
         });
