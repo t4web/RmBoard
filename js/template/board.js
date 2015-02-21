@@ -58,43 +58,43 @@ define([], function() {
                     </div>\n\
                 </div>\n\
                 <div class="row" id="columns">\n\
-                    <div class="col-md-1 from-in-progress" id="to-do">\
+                    <div class="col-md-1 from-in-progress tasks-column" id="to-do">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2 from-in-test from-in-prod" id="in-progress">\
+                    <div class="col-md-2 from-in-test from-in-prod tasks-column" id="in-progress">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2 from-in-progress" id="ready-for-test">\
+                    <div class="col-md-2 from-in-progress tasks-column" id="ready-for-test">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2" id="in-test">\
+                    <div class="col-md-2 tasks-column" id="in-test">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2 from-in-test" id="ready-for-prod">\
+                    <div class="col-md-2 from-in-test tasks-column" id="ready-for-prod">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2" id="in-prod">\
+                    <div class="col-md-2 tasks-column" id="in-prod">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-1 from-in-prod" id="done">\
+                    <div class="col-md-1 from-in-prod tasks-column" id="done">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\

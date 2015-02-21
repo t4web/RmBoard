@@ -56,8 +56,8 @@ define([], function() {
         BoardView: function(sl){
             var dfd = $.Deferred();
             require(["BoardView"], function(BoardView){
-                sl.resolve(["TasksCollection", "ConfirmView"], function(tasks, confirm){
-                    dfd.resolve(new BoardView({tasks: tasks, confirm: confirm}));
+                sl.resolve(["TasksCollection", "ConfirmView", "ColumnsRelationsService"], function(tasks, confirm, columnsRealations){
+                    dfd.resolve(new BoardView({tasks: tasks, confirm: confirm, columnsRealationsService: columnsRealations}));
                 });
             });
             return dfd.promise();

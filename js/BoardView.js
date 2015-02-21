@@ -5,7 +5,9 @@ define(
         'use strict';
 
         function updateColumnsHeight() {
-            var maxHeight = this.columns['to-do'].getHeight();
+            $('.tasks-column').height('auto');
+
+            var maxHeight = 600;
             _.each(this.columns, function (view) {
                 if (maxHeight < view.getHeight()) {
                     maxHeight = view.getHeight();
@@ -21,10 +23,9 @@ define(
 
             tasks: null,
             confirm: null,
+            columnsRealationsService: null,
             className: 'wrapper row-offcanvas',
             columns: {},
-            t: null,
-            t2: null,
 
             events: {
                 "click button#refresh-btn": "refresh",
@@ -34,9 +35,11 @@ define(
             initialize: function(options) {
                 this.tasks = options.tasks;
                 this.confirm = options.confirm;
+                this.columnsRealationsService = options.columnsRealationsService;
 
                 this.listenTo(this.tasks, 'fetch:before', this.startLoader);
                 this.listenTo(this.tasks, 'fetch:success', this.stopLoader);
+                this.listenTo(this.columnsRealationsService, 'move', $.proxy(updateColumnsHeight, this));
             },
 
             render: function() {
