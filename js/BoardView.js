@@ -4,6 +4,19 @@ define(
     function(Backbone, NProgress, boardTpl, TasksView, confirmTpl) {
         'use strict';
 
+        function updateColumnsHeight() {
+            var maxHeight = this.columns['to-do'].getHeight();
+            _.each(this.columns, function (view) {
+                if (maxHeight < view.getHeight()) {
+                    maxHeight = view.getHeight();
+                }
+            });
+
+            _.each(this.columns, function (view) {
+                view.$el.height(maxHeight);
+            });
+        }
+
         return Backbone.View.extend({
 
             tasks: null,
@@ -59,19 +72,7 @@ define(
                 NProgress.done();
                 $('button#refresh-btn').removeAttr('disabled');
 
-                var _this = this;
-                setTimeout(function() {
-                    var maxHeight = _this.columns['to-do'].getHeight();
-                    _.each(_this.columns, function (view, id) {
-                        if (maxHeight < view.getHeight()) {
-                            maxHeight = view.getHeight();
-                        }
-                    });
-                    console.log(maxHeight);
-                    _.each(_this.columns, function (view, id) {
-                        view.$el.height(maxHeight);
-                    });
-                }, 1000);
+                setTimeout($.proxy(updateColumnsHeight, this), 1000);
             },
 
             progressLoader: function(percent) {
