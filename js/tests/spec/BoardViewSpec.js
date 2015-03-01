@@ -1,6 +1,8 @@
 describe('Board suite', function() {
     var boardView;
     var tasks;
+    var confirm;
+    var columnsRealationsService;
 
     // Use require.js to fetch the module
     it("should load the AMD module", function(done) {
@@ -8,9 +10,13 @@ describe('Board suite', function() {
             ['BoardView'],
             function (BoardView) {
                 tasks = jasmine.createSpyObj('tasks', ['fetch', 'on', 'off']);
+                confirm = jasmine.createSpyObj('confirm', ['render']);
+                columnsRealationsService = jasmine.createSpyObj('columnsRealationsService', ['on', 'off']);
 
                 boardView = new BoardView({
-                    tasks: tasks
+                    tasks: tasks,
+                    confirm: confirm,
+                    columnsRealationsService: columnsRealationsService
                 });
                 expect(boardView).toBeDefined();
                 done();
@@ -27,11 +33,16 @@ describe('Board suite', function() {
 
         beforeEach(function(){
             app = jasmine.createSpyObj('app', ['getConfig']);
+            confirm.render.and.returnValue(confirm);
             boardView.render();
         });
 
         it("tasks.fetch() will be called", function() {
             expect(tasks.fetch).toHaveBeenCalled();
+        });
+
+        it("confirm.render() will be called", function() {
+            expect(confirm.render).toHaveBeenCalled();
         });
 
         it("el contain 7 columns", function() {
