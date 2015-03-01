@@ -3586,3 +3586,7 @@ body.modal-open {
     padding-right: 14px;
     padding-top: 14px;
 }
+
+.box.task-feedback {
+    border: 3px solid yellow;
+}

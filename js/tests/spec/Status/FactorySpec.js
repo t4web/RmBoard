@@ -40,6 +40,12 @@ describe('Status/Factory suite', function() {
         expect(status.toJSON()).toEqual({id: 2, name: "In progress"});
     });
 
+    it("create should return status object [In progress] if externalStatus = 4", function() {
+        var status = factory.create(4, 'bla-bla bla');
+
+        expect(status.toJSON()).toEqual({id: 2, name: "In progress"});
+    });
+
     it("create should return status object [Ready fo test] if externalStatus = 3", function() {
         var status = factory.create(3, 'bla-bla bla');
 

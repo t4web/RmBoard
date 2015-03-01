@@ -44,6 +44,10 @@ define(
                             colorClass = 'bg-green';
                     }
 
+                    if (value.status.id == 4) {
+                        colorClass += ' task-feedback';
+                    }
+
                     if (!value.hasOwnProperty('assigned_to')) {
                         return;
                     }

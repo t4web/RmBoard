@@ -24,7 +24,7 @@ describe('Tasks Collection suite', function () {
 
     it("parse should return the array of model attributes", function () {
         var parsedData;
-        var response =
+        var response = JSON.parse(
             '{' +
                 '"total_count":1457,' +
                 '"limit":25,' +
@@ -75,9 +75,9 @@ describe('Tasks Collection suite', function () {
                     '}' +
             '],' +
             '"offset":0' +
-        '}';
+        '}');
 
-        parsedData = tasks.parse(JSON.parse(response));
+        parsedData = tasks.parse(response);
 
         expect(parsedData).toEqual([
             {
@@ -89,6 +89,11 @@ describe('Tasks Collection suite', function () {
                 colorClass: 'bg-red'
             }
         ]);
+
+        response.issues[0].status.id = 4;
+        parsedData = tasks.parse(response);
+
+        expect(parsedData[0].colorClass).toEqual('bg-red task-feedback');
     });
 
     it("parse should skip tasks without 'assigned_to'", function () {
