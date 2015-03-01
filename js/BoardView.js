@@ -1,7 +1,7 @@
 define(
     'BoardView',
-    ["backbone", "lib/nprogress/nprogress", "template/board", "TasksView", "template/confirm"],
-    function(Backbone, NProgress, boardTpl, TasksView, confirmTpl) {
+    ["backbone", "lib/nprogress/nprogress", "template/board", "TasksView"],
+    function(Backbone, NProgress, boardTpl, TasksView) {
         'use strict';
 
         function updateColumnsHeight() {
