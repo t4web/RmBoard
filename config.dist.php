@@ -1,5 +1,6 @@
 <?php
 return [
+    'env' => 'development',
     'domain' => 'http://my-redmine.host',
     'links.in-progress' => 'http://my-redmine.host/projects/...',
     'links.ready-for-test' => 'http://my-redmine.host/projects/...',
