@@ -69,7 +69,7 @@ define(
                     if (newStatus == 'ready-for-prod') {
                         model.readyForProduction();
                     } else if (newStatus == 'in-progress') {
-                        model.inProgress();
+                        model.inFeedback();
                     }
 
                     events.trigger('move', { from: fromStatus, to: model.get('status') });

@@ -44,6 +44,14 @@ define(
                 updateTask(this.get('id'), this.get('name'), this.get('status'));
             },
 
+            inFeedback: function() {
+                this.set('name', clearAllMarkers(this.get('name')));
+                this.set('status', 2);
+                this.set('colorClass', this.get('colorClass') + ' task-feedback');
+
+                updateTask(this.get('id'), this.get('name'), 4);
+            },
+
             readyForTest: function() {
                 this.set('name', clearAllMarkers(this.get('name')));
                 this.set('status', 3);

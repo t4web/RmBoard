@@ -10,7 +10,7 @@ define(
 
             attributes : function () {
                 return {
-                    class : 'box box-solid ' + this.model.get( 'colorClass' ),
+                    class : 'box box-solid',
                     id : this.model.get( 'id' )
                 };
             },
@@ -21,6 +21,7 @@ define(
 
             render: function() {
                 this.$el.html(this.template(this.model.toJSON()));
+                this.$el.addClass(this.model.get( 'colorClass' ))
                 return this;
             }
 
