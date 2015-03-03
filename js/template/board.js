@@ -7,7 +7,7 @@ define([], function() {
                 </div>\n\
                 \n\
                 <div class="row">\n\
-                    <div class="col-md-1">\n\
+                    <div class="col-md-2">\n\
                         <h1 class="page-header"> \n\
                             To do\n\
                             <small>Новая</small>\n\
@@ -43,7 +43,7 @@ define([], function() {
                         </h1>\n\
                     </div>\n\
                     \n\
-                    <div class="col-md-2">\n\
+                    <div class="col-md-1">\n\
                         <h1 class="page-header">\n\
                             In prod <a href="<%=app.getConfig(\'links.in-prod\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <small>Решена, нужно проверить на прод</small>\n\
@@ -58,7 +58,7 @@ define([], function() {
                     </div>\n\
                 </div>\n\
                 <div class="row" id="columns">\n\
-                    <div class="col-md-1 from-in-progress tasks-column" id="to-do">\
+                    <div class="col-md-2 from-in-progress tasks-column" id="to-do">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
@@ -88,7 +88,7 @@ define([], function() {
                             <div class="loading-img"></div>\
                         </div>\
                     </div>\n\
-                    <div class="col-md-2 tasks-column" id="in-prod">\
+                    <div class="col-md-1 tasks-column" id="in-prod">\
                         <div class="box box-solid box-loader">\
                             <div class="overlay"></div>\
                             <div class="loading-img"></div>\
