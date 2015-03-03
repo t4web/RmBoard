@@ -2,6 +2,8 @@ describe('Task Model suite', function () {
     var TaskModel;
 
     beforeEach(function(){
+        app.config = {};
+        app.config.env = 'test';
         spyOn($, 'ajax').and.callFake(function() { return; });
     });
 

@@ -5,7 +5,9 @@ define(
         'use strict';
 
         function updateTask(id, name, statusId) {
-            if (app.config.env != 'development') {
+            if (app.config.env != 'development'
+                && app.config.env != 'test') {
+
                 $.ajax({
                     url: '/index.php?method=PUT&resource=/issues/' + id + '.json',
                     data: {issue: {subject: name, status_id: statusId}},
