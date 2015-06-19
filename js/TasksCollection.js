@@ -4,9 +4,24 @@ define(
     function (Backbone, TaskModel) {
         'use strict';
 
+        var offset = 0;
+
+        function _fetch(collection, append) {
+
+            collection.url = '/index.php?resource=/issues.json?limit=100ANDsort=updated_on:descANDoffset=' + offset;
+
+            Backbone.Collection.prototype.fetch.call(
+                collection,
+                {
+                    success: collection.onSuccess,
+                    error: collection.onError,
+                    remove: append ? false : true
+                }
+            );
+        }
+
         var TasksCollection = Backbone.Collection.extend({
             model: TaskModel,
-            url: '/index.php?resource=/issues.json?limit=100ANDsort=updated_on:desc',
             statusFactory: null,
             assignees: null,
 
@@ -75,17 +90,18 @@ define(
             fetch: function() {
                 this.trigger('fetch:before');
 
-                Backbone.Collection.prototype.fetch.call(
-                    this,
-                    {
-                        success: this.onSuccess,
-                        error: this.onError
-                    }
-                );
+                offset = 0;
+                _fetch(this, true);
             },
 
             onSuccess: function(collection, response, options) {
-                collection.trigger('fetch:success', collection);
+                if (offset == 400) {
+                    collection.trigger('fetch:success', collection);
+                    return;
+                }
+
+                offset += 100;
+                _fetch(collection, true);
             },
 
             onError: function(collection, response, options) {
