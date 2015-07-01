@@ -21,7 +21,7 @@ define(
             this.create = function(externalStatus, taskName) {
                 var status = statuses.get(1);
 
-                if (externalStatus == 2 || externalStatus == 4) {
+                if (externalStatus == 2) {
                     status = statuses.get(2);
                 }
                 if (externalStatus == 3) {

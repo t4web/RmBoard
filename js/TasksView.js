@@ -10,7 +10,15 @@ define(
             } else if (task1.get('assignee').id > task2.get('assignee').id) {
                 return 1;
             }
+            return 0;
+        }
 
+        function sortByFeedbackFirst(task1, task2) {
+            if (task1.isFeedback() > task2.isFeedback()) {
+                return -1;
+            } else if (task1.isFeedback() < task2.isFeedback())  {
+                return 1;
+            }
             return 0;
         }
 
@@ -32,6 +40,9 @@ define(
                 
                 var tasks = this.tasks.where({status: this.status});
 
+                if (this.status == 1) {
+                    tasks.sort(sortByFeedbackFirst);
+                }
                 if (this.status == 2) {
                     tasks.sort(sortByAssignee);
                 }

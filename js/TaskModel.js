@@ -48,7 +48,7 @@ define(
 
             inFeedback: function() {
                 this.set('name', clearAllMarkers(this.get('name')));
-                this.set('status', 2);
+                this.set('status', 1);
                 this.set('colorClass', this.get('colorClass') + ' task-feedback');
 
                 updateTask(this.get('id'), this.get('name'), 4);
@@ -87,6 +87,10 @@ define(
                 this.set('status', 5);
 
                 updateTask(this.get('id'), this.get('name'), this.get('status'));
+            },
+
+            isFeedback: function() {
+                return this.get('colorClass').indexOf('feedback') != -1;
             }
         });
 
