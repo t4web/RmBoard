@@ -38,7 +38,7 @@ define(
                 var authToken = $('#auth-token').val();
 
                 if (authToken.length > 0) {
-                    $.cookie('auth_token', authToken);
+                    $.cookie('auth_token', authToken, { expires: 7 });
                 }
 
                 this.reload();
