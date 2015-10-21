@@ -38,7 +38,7 @@ define(
                 this.columnsRealationsService = options.columnsRealationsService;
 
                 this.listenTo(this.tasks, 'fetch:before', this.startLoader);
-                this.listenTo(this.tasks, 'fetch:success', this.stopLoader);
+                this.listenTo(this.tasks, 'fetch:success:end', this.stopLoader);
                 this.listenTo(this.columnsRealationsService, 'move', $.proxy(updateColumnsHeight, this));
             },
 

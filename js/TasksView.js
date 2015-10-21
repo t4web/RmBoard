@@ -49,6 +49,8 @@ define(
 
                 this.$el.html('');
 
+                $('#' + this.id + '-count').text('(' + tasks.length + ')');
+
                 _.each(tasks, function(task){
                     var view = new TaskView({ model: task });
                     this.$el.append(view.render().el);

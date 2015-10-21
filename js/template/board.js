@@ -10,14 +10,14 @@ define([], function() {
                     <div class="col-md-2">\n\
                         <h1 class="page-header"> \n\
                             To do\n\
-                            <small>Новая</small>\n\
+                            <small><span id="to-do-count">(354)</span> Новая</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
                             In progress <a href="<%=app.getConfig(\'links.in-progress\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
-                            <small>В работе</small>\n\
+                            <small><span id="in-progress-count">(354)</span> В работе</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
@@ -25,28 +25,28 @@ define([], function() {
                         <h1 class="page-header">\n\
                             Ready for merge on test <a href="<%=app.getConfig(\'links.ready-for-test\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
                             <!--<a href="javascript:void(0);" id="deploy-all-on-test"><i class="fa fa-sign-out"></i></a>-->\n\
-                            <small>Решена, нужно смерджить на тест</small>\n\
+                            <small><span id="ready-for-test-count">(354)</span> Решена, нужно смерджить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
                             In Test <a href="<%=app.getConfig(\'links.in-test\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
-                            <small>Решена, нужно проверить на тест</small>\n\
+                            <small><span id="in-test-count">(354)</span> Решена, нужно проверить на тест</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-2">\n\
                         <h1 class="page-header">\n\
                             Ready for merge on prod <a href="<%=app.getConfig(\'links.ready-for-prod\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
-                            <small>Решена, нужно смерджить на прод</small>\n\
+                            <small><span id="ready-for-prod-count">(354)</span> Решена, нужно смерджить на прод</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
                     <div class="col-md-1">\n\
                         <h1 class="page-header">\n\
                             In prod <a href="<%=app.getConfig(\'links.in-prod\')%>" target="_blank"><i class="fa fa-external-link"></i></a>\n\
-                            <small>Решена, нужно проверить на прод</small>\n\
+                            <small><span id="in-prod-count">(354)</span> Решена, нужно проверить на прод</small>\n\
                         </h1>\n\
                     </div>\n\
                     \n\
