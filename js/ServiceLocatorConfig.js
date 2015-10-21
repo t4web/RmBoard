@@ -9,6 +9,7 @@ define([], function() {
                         {id: 14, name: "Максим Гултурян", nick: "MG", colorClass: "label-success" },
                         {id: 16, name: "Дмитрий Кирилов", nick: "DK", colorClass: "label-info" },
                         {id: 15, name: "Артем Гуржий", nick: "AM", colorClass: "label-warning" },
+                        {id: 36, name: "Борис Манжела", nick: "BM", colorClass: "label-primary" },
                     ],
                     {
                         model: Backbone.Model.extend({
