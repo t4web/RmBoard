@@ -10,7 +10,7 @@ define(
 
             collection.url = '/index.php?resource=/issues.json?limit=100ANDsort=updated_on:descANDoffset=' + offset;
             if (app.getConfig('project-id')) {
-                collection.url += 'project_id=' + app.getConfig('project-id');
+                collection.url += '&project_id=' + app.getConfig('project-id');
             }
 
             Backbone.Collection.prototype.fetch.call(
