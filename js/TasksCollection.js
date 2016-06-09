@@ -8,7 +8,7 @@ define(
 
         function _fetch(collection, append) {
 
-            collection.url = '/index.php?resource=/issues.json?limit=100ANDsort=updated_on:descANDoffset=' + offset;
+            collection.url = '/index.php?resource=/issues.json?project_id=kovla&limit=100ANDsort=updated_on:descANDoffset=' + offset;
 
             Backbone.Collection.prototype.fetch.call(
                 collection,
