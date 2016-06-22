@@ -99,7 +99,7 @@ define(
 
             onSuccess: function(collection, response, options) {
                 collection.trigger('fetch:success', collection);
-                if (offset == 500) {
+                if (offset == 400) {
                     collection.trigger('fetch:success:end');
                     return;
                 }
