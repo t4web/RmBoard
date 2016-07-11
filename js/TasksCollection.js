@@ -36,9 +36,11 @@ define(
             parse: function(response) {
                 var rawTasks = [];
 
-                if (response.issues.length == 0) {
+                if (response.issues.length == 0 && app.hasIssues == false) {
                     this.trigger('empty-issues');
                     return rawTasks;
+                } else {
+                    app.hasIssues = true;
                 }
 
                 _.each(response.issues, function(value){

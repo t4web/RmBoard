@@ -1,6 +1,7 @@
 var app = {
 
     config: [],
+    hasIssues: false,
 
     run: function(board, loginForm) {
         $('body').prepend(board.render().el);

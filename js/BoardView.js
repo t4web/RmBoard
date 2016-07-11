@@ -63,6 +63,7 @@ define(
             },
 
             refresh: function() {
+                app.hasIssues = false;
                 this.tasks.fetch();
             },
 
